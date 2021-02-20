@@ -1,7 +1,4 @@
 #include "World.h"
-
-#include <fstream>
-
 #include "Intersection.h"
 #include "Progressbar.hpp"
 #include "Ray.h"
@@ -16,6 +13,7 @@ Color shade_hit(World &world, Computations &comps)
     }
 
     return temp;
+    // return lighting(comps.object.material, world.lights[0], comps.point, comps.eyev, comps.normalv);
 }
 
 Color color_at(World &world, Ray &r)
@@ -32,27 +30,7 @@ Color color_at(World &world, Ray &r)
 
 Canvas World::render(Camera &cam)
 {
-    std::ofstream out("C:\\Users\\tompe\\desktop\\highest_values.txt");
-    double red_max = 0;
-    double green_max = 0;
-    double blue_max = 0;
-    bool first_time = true;
     progresscpp::ProgressBar pb(cam.hsize * cam.vsize, 70);
-
-    for (int y = 0; y < cam.vsize; y++)
-    {
-        for (int x = 0; x < cam.hsize; x++)
-        {
-            Ray r = cam.ray_for_pixel(x, y);
-            Color clr = color_at(*this, r);
-
-            red_max = first_time ? clr.red : std::max(red_max, clr.red);
-            green_max = first_time ? clr.green : std::max(green_max, clr.green);
-            blue_max = first_time ? clr.blue : std::max(blue_max, clr.blue);
-            first_time = false;
-            out << "r: " << red_max << " ; g: " << green_max << " ; b: " << blue_max << std::endl;
-        }
-    }
 
     Canvas image{cam.hsize, cam.vsize};
     for (int y = 0; y < cam.vsize; y++)
@@ -62,13 +40,12 @@ Canvas World::render(Camera &cam)
             Ray r = cam.ray_for_pixel(x, y);
             Color clr = color_at(*this, r);
 
-            image.write_pixel(x, y, clr.normize(red_max, green_max, blue_max));
+            image.write_pixel(x, y, clr.normize(1, 1, 1));
             ++pb;
             pb.display();
         }
     }
 
-    out.close();
     pb.done();
     return image;
 }

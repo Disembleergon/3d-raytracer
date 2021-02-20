@@ -1,7 +1,9 @@
 #pragma once
 
-#include <math.h>
 #include <iostream>
+#include <math.h>
+#include <string>
+//#include "TestFunctions.h"
 
 using scalar_t = double;
 
@@ -11,30 +13,16 @@ struct Color
     scalar_t green = 0;
     scalar_t blue = 0;
 
-    Color() = default;
-
-    Color(const scalar_t r, const scalar_t g, const scalar_t b)
-        : red{r}, green{g}, blue{b}
-    {
-
-        if (red > 20 || green > 20 || blue > 20)
-        {
-            std::cerr << "Großer Farbwert: " << __LINE__ << std::endl;
-            // abort();
-            // throw "Großer Farbwert!";
-        }
-    }
-
     Color normize(const scalar_t red_max, const scalar_t green_max, const scalar_t blue_max)
     {
-        scalar_t n_red = (red - 0) * (255 / (red_max - 0));
+        /*scalar_t n_red = (red - 0) * (255 / (red_max - 0));
         scalar_t n_green = (green - 0) * (255 / (green_max - 0));
-        scalar_t n_blue = (blue - 0) * (255 / (blue_max - 0));
+        scalar_t n_blue = (blue - 0) * (255 / (blue_max - 0));*/
 
-        // return Color{ floor(red >= 1.0 ? 255 : red * 256), floor(green >= 1.0 ?
-        // 255 : green * 256), floor(blue >= 1.0 ? 255 : blue * 256) };
-        //return Color{red * 2550, green * 2550, blue * 2550};
-        return Color{n_red, n_green, n_blue};
+        return Color{floor(red >= 1.0 ? 255 : red * 255), floor(green >= 1.0 ? 255 : green * 255),
+                     floor(blue >= 1.0 ? 255 : blue * 255)};
+
+       /* return Color{n_red, n_green, n_blue};*/
     }
 };
 

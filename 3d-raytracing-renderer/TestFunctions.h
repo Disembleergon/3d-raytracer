@@ -167,7 +167,7 @@ inline void CanvasTest()
     world.objects.push_back(left);
 
     world.lights.push_back(PointLight{point(-10, 10, -10), Color{1, 1, 1}});
-    Camera cam{25, 12, M_PI / 3};
+    Camera cam{100, 50, M_PI / 3};
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 
     /*World world{};
