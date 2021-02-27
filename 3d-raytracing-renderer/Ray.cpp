@@ -48,7 +48,7 @@ IntersectionList Ray::intersect_world(World world)
 
     std::sort(xs.begin(), xs.end());    // Objektverwechselung -> Soertieren verwechselt Objekte und somit Farben
 
-    for (int i = 0; i < xs.size(); i++)
+    for (int i = 0; i < xs.size(); i++)    // -> DEBUG: hier wird das Obere bestätigt
     {
         TESTS::printIntersection(xs[i]);
         TESTS::printColor(xs[i].object.material.color);

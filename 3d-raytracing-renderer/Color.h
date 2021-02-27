@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h>
 #include <string>
-//#include "TestFunctions.h"
+#include "Equal.h"
 
 using scalar_t = double;
 
@@ -22,7 +22,12 @@ struct Color
         return Color{floor(red >= 1.0 ? 255 : red * 255), floor(green >= 1.0 ? 255 : green * 255),
                      floor(blue >= 1.0 ? 255 : blue * 255)};
 
-       /* return Color{n_red, n_green, n_blue};*/
+        /* return Color{n_red, n_green, n_blue};*/
+    }
+
+    bool operator==(const Color &clr)
+    {
+        return floatEqual(red, clr.red) && floatEqual(green, clr.green) && floatEqual(blue, clr.blue);
     }
 };
 

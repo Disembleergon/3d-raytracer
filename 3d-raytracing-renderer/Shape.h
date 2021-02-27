@@ -12,6 +12,10 @@ struct Shape {
 		transform = sp.transform;
 	}
 
+	bool operator==(const Shape& sp) {
+          return material == sp.material && transform == sp.transform;
+	}
+
 	Tuple normal_at(const Tuple& p) {
 		// world space to object space
 		Tuple obj_point = transform.inverse() * p;

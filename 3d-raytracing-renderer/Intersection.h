@@ -25,6 +25,10 @@ struct Intersection
         return t > i.t;
     }
 
+    bool operator==(const Intersection& i) {
+      return t == i.t && object == i.object;
+    }
+
     /*void operator = (Intersection& i) {
         t = i.t;
         object = i.object;
