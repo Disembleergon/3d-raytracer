@@ -2,6 +2,7 @@
 #include "Intersection.h"
 #include "Progressbar.hpp"
 #include "Ray.h"
+#include "TestFunctions.h"
 
 Color shade_hit(World &world, Computations &comps)
 {

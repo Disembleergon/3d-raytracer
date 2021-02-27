@@ -1,49 +1,58 @@
 #pragma once
 #include "Shape.h"
-#include <vector>
 #include <algorithm>
+#include <vector>
 
-struct Intersection {
+struct Intersection
+{
 
-	double t;
-	Shape object;
+    double t;
+    Shape object;
 
-	Intersection(const double& pt, const Shape& ps)
-		: t{ pt }, object{ ps }{}
+    Intersection(const double &pt, const Shape &ps) : t{pt}, object{ps}
+    {
+    }
 
-	Intersection() = default;
+    Intersection() = default;
 
-	bool operator < (const Intersection& i) {	// for sorting
-		return t < i.t;
-	}
+    bool operator<(const Intersection &i)
+    { // for sorting
+        return t < i.t;
+    }
 
-	/*void operator = (Intersection& i) {
-		t = i.t;
-		object = i.object;
-	}*/
+    bool operator>(const Intersection &i)
+    { // for sorting
+        return t > i.t;
+    }
 
-	bool isDefined() {
-		return t != NULL;
-	}
+    /*void operator = (Intersection& i) {
+        t = i.t;
+        object = i.object;
+    }*/
 
+    bool isDefined()
+    {
+        return t != NULL;
+    }
 };
 
 using IntersectionList = std::vector<Intersection>;
 
 // t ist 0 wenn alle Intersections negativ sind!
-inline Intersection hit(const IntersectionList& pl) {
+inline Intersection hit(IntersectionList &pl)
+{
 
-	IntersectionList l;
+    IntersectionList l;
 
-	for (int i = 0; i < pl.size(); i++) {
-		if (pl[i].t >= 0)
-			l.push_back(pl[i]);
-	}
+    for (int i = 0; i < pl.size(); i++)
+    {
+        if (pl[i].t >= 0)
+            l.push_back(pl[i]);
+    }
 
-	if (l.size() == 0)
-		return Intersection{};
+    if (l.size() == 0)
+        return Intersection{};
 
-	std::sort(l.begin(), l.end());
-	return l[0];
-
+    std::sort(l.begin(), l.end());
+    return l[0];
 }

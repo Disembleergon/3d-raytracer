@@ -37,6 +37,6 @@ public:
 
 	IntersectionList intersect(Shape&);
 
-	IntersectionList intersect_world(World&);
+	IntersectionList intersect_world(World);
 
 };
