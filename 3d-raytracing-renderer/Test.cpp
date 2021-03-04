@@ -3,14 +3,14 @@
 int main()
 {
 
-    World w = DEFAULT_WORLD();
+    /*World w = DEFAULT_WORLD();
     w.objects[0].material.ambient = 1;
     w.objects[1].material.ambient = 1;
 
     Ray r{point(0, 0, 0.75), vector(0, 0, -1)};
     Color clr = color_at(w, r);
     TESTS::printColor(w.objects[1].material.color);
-    TESTS::printColor(clr);
+    TESTS::printColor(clr);*/
 
     /*World w{};
 
@@ -30,7 +30,7 @@ int main()
     cam.transform = view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene2.ppm");*/
 
-    // TESTS::CanvasTest();
+    TESTS::CanvasTest();
 
     system("pause");
     return 0;

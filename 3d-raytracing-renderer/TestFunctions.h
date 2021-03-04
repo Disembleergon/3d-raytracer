@@ -129,7 +129,7 @@ inline void CanvasTest()
 {
     World world{};
 
-    /*Sphere floor{};
+    Sphere floor{};
     floor.transform = scaling(10, 0.01, 10);
     floor.material.color = Color{1, 0.9, 0.9};
     floor.material.specular = 0;
@@ -150,7 +150,7 @@ inline void CanvasTest()
     middle.material.color = Color{0.1, 1, 0.5};
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
-    world.objects.push_back(middle);*/
+    world.objects.push_back(middle);
 
     Sphere right{};
     right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5);
@@ -159,12 +159,12 @@ inline void CanvasTest()
     right.material.specular = 0.3;
     world.objects.push_back(right);
 
-    /*Sphere left{};
+    Sphere left{};
     left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33);
     left.material.color = Color{1, 0.8, 0.1};
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
-    world.objects.push_back(left);*/
+    world.objects.push_back(left);
 
     world.lights.push_back(PointLight{point(-10, 10, -10), Color{1, 1, 1}});
     Camera cam{100, 50, M_PI / 3};

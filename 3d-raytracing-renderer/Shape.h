@@ -10,6 +10,7 @@ struct Shape {
 
 	void operator = (const Shape& sp) {
 		transform = sp.transform;
+		material = sp.material;
 	}
 
 	bool operator==(const Shape& sp) {
