@@ -14,7 +14,7 @@ Color shade_hit(World &world, Computations &comps)
     }
 
     return temp;
-    // return lighting(comps.object.material, world.lights[0], comps.point, comps.eyev, comps.normalv);
+    //return lighting(comps.object.material, world.lights[0], comps.point, comps.eyev, comps.normalv);
 }
 
 Color color_at(World &world, Ray &r)

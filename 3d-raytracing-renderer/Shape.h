@@ -21,7 +21,7 @@ struct Shape {
 		// world space to object space
 		Tuple obj_point = transform.inverse() * p;
 		// compute normal
-		Tuple obj_normal = p - point(0, 0, 0);
+		Tuple obj_normal = obj_point - point(0, 0, 0);
 		// object space to world space
 		Tuple world_normal = transform.inverse().transpose() * obj_normal;
 		// has to be Vector

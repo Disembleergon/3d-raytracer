@@ -136,7 +136,7 @@ inline void CanvasTest()
     world.objects.push_back(floor);
 
     Sphere left_wall{};
-    left_wall.transform = translation(0, 0, 5) * rotate_y(-(M_PI / 4)) * rotate_x(M_PI / 2) * scaling(10, 0.01, 10);
+    left_wall.transform = translation(0, 0, 5) * rotate_y(-M_PI / 4) * rotate_x(M_PI / 2) * scaling(10, 0.01, 10);
     left_wall.material = floor.material;
     world.objects.push_back(left_wall);
 
@@ -167,7 +167,7 @@ inline void CanvasTest()
     world.objects.push_back(left);
 
     world.lights.push_back(PointLight{point(-10, 10, -10), Color{1, 1, 1}});
-    Camera cam{100, 50, M_PI / 3};
+    Camera cam{300, 150, M_PI / 3};
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 
     world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");

@@ -3,14 +3,15 @@
 int main()
 {
 
-    /*World w = DEFAULT_WORLD();
-    w.objects[0].material.ambient = 1;
-    w.objects[1].material.ambient = 1;
+    /*Sphere s{};
+    s.transform = translation(0, 1, 0);
+    auto n = s.normal_at(point(0, 1.70711, -0.70711));
+    TESTS::printTuple(n);*/
 
-    Ray r{point(0, 0, 0.75), vector(0, 0, -1)};
-    Color clr = color_at(w, r);
-    TESTS::printColor(w.objects[1].material.color);
-    TESTS::printColor(clr);*/
+    /*Sphere s{};
+    s.transform = scaling(1, 0.5, 1) * rotate_z(M_PI / 5);
+    Tuple n = s.normal_at(point(0, sqrt(2)/2, -sqrt(2)/2));
+    TESTS::printTuple(n);*/
 
     /*World w{};
 
@@ -26,7 +27,7 @@ int main()
     PointLight light{point(-10, 10, -10), Color{1, 1, 1}};
     w.lights.push_back(light);
 
-    Camera cam{300, 150, M_PI / 3};
+    Camera cam{100, 50, M_PI / 3};
     cam.transform = view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene2.ppm");*/
 

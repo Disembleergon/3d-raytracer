@@ -17,14 +17,15 @@ IntersectionList Ray::intersect(Shape &sp)
     scalar_t a = dot(r.direction(), r.direction());
     scalar_t b = 2 * (dot(r.direction(), sphere_to_ray));
     scalar_t c = (dot(sphere_to_ray, sphere_to_ray) - 1);
-    scalar_t discriminant = (b * b) - (4 * a * c);
+    scalar_t discriminant = pow(b,2) - 4 * a * c;
 
     if (discriminant < 0) // wenn negativ: Ray verfehlt Sphere
         return intersections;
 
     // Reihenfolge: aufsteigend
-    intersections.push_back(Intersection{(((-b) - sqrt(discriminant)) / (2 * a)), sp});
-    intersections.push_back(Intersection{(((-b) + sqrt(discriminant)) / (2 * a)), sp});
+    intersections.push_back(Intersection{((-b - sqrt(discriminant)) / (2 * a)), sp});
+    intersections.push_back(Intersection{((-b + sqrt(discriminant)) / (2 * a)), sp});
+    //std::sort(intersections.begin(), intersections.end());
 
     return intersections;
 }
@@ -41,34 +42,12 @@ IntersectionList Ray::intersect_world(World world)
 
         if (xxs.size() != 0)
         {
-            xs.push_back(xxs[0]); // keine Objektverwechselung
+            xs.push_back(xxs[0]);
             xs.push_back(xxs[1]);
         }
     }
 
-    std::sort(xs.begin(), xs.end());    // Objektverwechselung -> Soertieren verwechselt Objekte und somit Farben
-
-    /*scalar_t min = 10000;
-    int min_index = -1;
-    for (int i = 0; i < xs.size(); i++)
-    {
-        auto &s = xs[i];
-        if (s.t < min)
-        {
-            min = s.t;
-            min_index = i;
-        }
-    }*/
-
-    //TESTS::printIntersection(xs[min_index]);
-
-    // 0.8 0.4 0.13 -> sortiert -> erste Intersection
-
-    /*for (int i = 0; i < xs.size(); i++) // -> DEBUG: hier wird das Obere best�tigt
-    {
-        TESTS::printIntersection(xs[i]);
-        TESTS::printColor(xs[i].object.material.color);
-    }*/
+    std::sort(xs.begin(), xs.end()); // fixed
 
     return xs;
 }
