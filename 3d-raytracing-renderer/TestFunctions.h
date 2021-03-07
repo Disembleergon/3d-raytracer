@@ -1,7 +1,8 @@
 #pragma once
 #define _USE_MATH_DEFINES
-#include <math.h>
+#define EPSILON 0.00001
 
+#include <math.h>
 #include <fstream>
 #include <iostream>
 
@@ -113,6 +114,8 @@ inline void printComputations(const Computations &cp)
     TESTS::printTuple(cp.normalv);
     std::cout << "point:\n";
     TESTS::printTuple(cp.point);
+    std::cout << "overpoint:\n";
+    TESTS::printTuple(cp.over_point);
     std::cout << "t: " << cp.t << std::endl;
     std::cout << "inside? " << cp.inside << "\n\n";
 }
@@ -166,7 +169,7 @@ inline void CanvasTest()
     left.material.specular = 0.3;
     world.objects.push_back(left);
 
-    world.lights.push_back(PointLight{point(-10, 10, -10), Color{1, 1, 1}});
+    world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
     Camera cam{300, 150, M_PI / 3};
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 

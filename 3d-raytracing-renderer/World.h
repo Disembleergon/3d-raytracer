@@ -16,7 +16,7 @@ struct World
 {
 
     std::vector<Shape> objects;
-    std::vector<PointLight> lights;
+    PointLight light;
 
     Canvas render(Camera &);
 };
@@ -25,7 +25,7 @@ inline World DEFAULT_WORLD()
 {
 
     World out{};
-    out.lights.push_back(PointLight{point(-10, 10, -10), Color{1, 1, 1}});
+    out.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
 
     Sphere s1{};
     Material m1{};
@@ -48,3 +48,5 @@ Color shade_hit(World &world, Computations &comps);
 
 // bring everything together (calculating color based on a ray and the world)
 Color color_at(World &world, Ray &r);
+
+bool is_shadowed(World &world, Tuple &p);

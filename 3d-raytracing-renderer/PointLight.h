@@ -12,7 +12,7 @@ struct PointLight
 };
 
 inline Color lighting(const Material &mat, const PointLight &light, const Tuple &poi, const Tuple &eyev,
-                      const Tuple &normalv)
+                      const Tuple &normalv, const bool in_shadow)
 {
 
     // combine the surface color with the light's color/intensity
@@ -30,7 +30,7 @@ inline Color lighting(const Material &mat, const PointLight &light, const Tuple 
 
     double light_dot_normal = dot(lightv, normalv);
 
-    if (light_dot_normal < 0)
+    if (light_dot_normal < 0 || in_shadow)
     {
         return ambient;
     }

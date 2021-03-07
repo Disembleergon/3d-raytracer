@@ -6,15 +6,8 @@
 
 Color shade_hit(World &world, Computations &comps)
 {
-    Color temp{};
-
-    for (int i = 0; i < world.lights.size(); i++)
-    {
-        temp = temp + lighting(comps.object.material, world.lights[i], comps.point, comps.eyev, comps.normalv);
-    }
-
-    return temp;
-    //return lighting(comps.object.material, world.lights[0], comps.point, comps.eyev, comps.normalv);
+    bool shadowed = is_shadowed(world, comps.over_point);
+    return lighting(comps.object.material, world.light, comps.point, comps.eyev, comps.normalv, shadowed);
 }
 
 Color color_at(World &world, Ray &r)
@@ -49,4 +42,19 @@ Canvas World::render(Camera &cam)
 
     pb.done();
     return image;
+}
+
+bool is_shadowed(World &world, Tuple &p)
+{
+    Tuple v = world.light.position - p;
+    auto distance = magnitude(v);
+    Tuple direction = normalize(v);
+
+    Ray r{p, direction};
+    IntersectionList intersections = r.intersect_world(world);
+    Intersection h = hit(intersections);
+
+    if (h.isDefined() && h.t < distance)
+        return true;
+    return false;
 }
