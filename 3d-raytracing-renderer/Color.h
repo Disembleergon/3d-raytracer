@@ -13,7 +13,7 @@ struct Color
     scalar_t green = 0;
     scalar_t blue = 0;
 
-    Color normize(const scalar_t red_max, const scalar_t green_max, const scalar_t blue_max)
+    Color normize()
     {
         /*scalar_t n_red = (red - 0) * (255 / (red_max - 0));
         scalar_t n_green = (green - 0) * (255 / (green_max - 0));

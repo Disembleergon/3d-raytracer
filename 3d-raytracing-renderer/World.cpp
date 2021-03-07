@@ -34,7 +34,7 @@ Canvas World::render(Camera &cam)
             Ray r = cam.ray_for_pixel(x, y);
             Color clr = color_at(*this, r);
 
-            image.write_pixel(x, y, clr.normize(1, 1, 1));
+            image.write_pixel(x, y, clr.normize());
             ++pb;
             pb.display();
         }
