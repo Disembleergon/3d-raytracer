@@ -1,7 +1,7 @@
 #pragma once
-#include "Matrix.h"
-#include "Ray.h"
 #include <math.h>
+
+#include "Matrix.h"
 
 // Camera is always 1 unit from the canvas away
 

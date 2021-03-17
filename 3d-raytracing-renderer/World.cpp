@@ -1,8 +1,10 @@
 #include "World.h"
-#include "Intersection.h"
-#include "Progressbar.hpp"
+#include "Computations.h"
 #include "Ray.h"
-#include "TestFunctions.h"
+#include "Intersection.h"
+#include "Canvas.h"
+#include "Progressbar.hpp"
+#include "Camera.h"
 
 Color shade_hit(World &world, Computations &comps)
 {

@@ -1,15 +1,14 @@
 #pragma once
-#include "Camera.h"
-#include "Canvas.h"
-#include "Computations.h"
-#include "PointLight.h"
-#include "Ray.h"
-#include "Shape.h"
-#include "Sphere.h"
 #include <vector>
 
+#include "PointLight.h"
+#include "Matrix.h"
+#include "Sphere.h"
+
+class Shape;
 class Computations;
 class Ray;
+class Canvas;
 class Camera;
 
 struct World

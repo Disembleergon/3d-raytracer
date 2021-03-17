@@ -1,7 +1,6 @@
 #pragma once
-#include "Matrix.h"
 #include "Material.h"
-#include "Tuple.h"
+#include "Matrix.h"
 
 struct Shape {
 

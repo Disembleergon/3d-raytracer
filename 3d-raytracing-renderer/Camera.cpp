@@ -1,4 +1,6 @@
 #include "Camera.h"
+#include "Ray.h"
+#include "Tuple.h"
 
 Ray Camera::ray_for_pixel(const int &px, const int &py)
 {

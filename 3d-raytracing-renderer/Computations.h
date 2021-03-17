@@ -1,9 +1,8 @@
 #pragma once
-#include "Intersection.h"
-#include "Ray.h"
 #include "Shape.h"
 #include "Tuple.h"
 
+class Intersection;
 class Ray;
 
 struct Computations

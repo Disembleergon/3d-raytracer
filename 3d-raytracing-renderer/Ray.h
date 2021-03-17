@@ -1,12 +1,12 @@
 #pragma once
 #include "Tuple.h"
-#include "Shape.h"
-#include "Intersection.h"
 #include "Matrix.h"
-#include "World.h"
 #include <vector>
 
+class Shape;
 class World;
+class Intersection;
+
 using scalar_t = double;
 
 class Ray {
@@ -14,6 +14,7 @@ class Ray {
 private:
 	const Tuple m_origin;
 	const Tuple m_direction;
+	using IntersectionList = std::vector<Intersection>;
 public:
 
 	Ray(const Tuple& origin, const Tuple& direction)

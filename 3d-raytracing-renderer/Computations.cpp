@@ -1,4 +1,8 @@
 #include "Computations.h"
+#include "Intersection.h"
+#include "Ray.h"
+#include "Tuple.h"
+
 #define EPSILON 0.00001
 
 Computations prepare_computations(Intersection i, Ray r)
@@ -7,7 +11,6 @@ Computations prepare_computations(Intersection i, Ray r)
     Tuple point = r.position(i.t);
     Tuple eyev = r.direction() * -1;
     Tuple normalv = i.object.normal_at(point);
-    // overpoint COULD BE broken
     Tuple overpoint = point + normalv * EPSILON;
     bool inside = false;
 

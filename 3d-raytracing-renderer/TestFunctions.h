@@ -170,10 +170,10 @@ inline void CanvasTest()
     world.objects.push_back(left);
 
     world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
-    Camera cam{300, 150, M_PI / 3};
+    Camera cam{100, 50, M_PI / 3};
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 
-    world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
+    world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\sceneKEV.ppm");
 }
 
 } // namespace TESTS

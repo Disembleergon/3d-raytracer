@@ -1,10 +1,13 @@
 #include "Ray.h"
-#include "TestFunctions.h"
+#include "Shape.h"
+#include "Intersection.h"
+#include "World.h"
+
 #include <algorithm>
 #include <iostream>
 #include <math.h>
 
-IntersectionList Ray::intersect(Shape &sp)
+Ray::IntersectionList Ray::intersect(Shape &sp)
 {
 
     Ray r = transform(sp.transform.inverse());
