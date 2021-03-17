@@ -14,7 +14,6 @@ class Ray {
 private:
 	const Tuple m_origin;
 	const Tuple m_direction;
-	using IntersectionList = std::vector<Intersection>;
 public:
 
 	Ray(const Tuple& origin, const Tuple& direction)
@@ -36,8 +35,6 @@ public:
 		return Ray{ m * m_origin, m * m_direction };
 	}
 
-	IntersectionList intersect(Shape&);
-
-	IntersectionList intersect_world(World);
+	std::vector<Intersection> intersect_world(World);
 
 };

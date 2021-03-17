@@ -6,11 +6,8 @@ class Intersection;
 class Ray;
 class Tuple;
 
-struct Sphere : public Shape
+struct Plane : public Shape
 {
-
-    Sphere() = default;
-
     std::vector<Intersection> local_intersect(Ray) override;
     Tuple local_normal_at(const Tuple &) override;
 };

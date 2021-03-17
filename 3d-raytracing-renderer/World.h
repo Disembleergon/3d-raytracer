@@ -14,7 +14,7 @@ class Camera;
 struct World
 {
 
-    std::vector<Shape> objects;
+    std::vector<Shape*> objects;
     PointLight light;
 
     Canvas render(Camera &);
@@ -36,8 +36,8 @@ inline World DEFAULT_WORLD()
     Sphere s2{};
     s2.transform = scaling(0.5, 0.5, 0.5);
 
-    out.objects.push_back(s1);
-    out.objects.push_back(s2);
+    out.objects.push_back(&s1);
+    out.objects.push_back(&s2);
 
     return out;
 }

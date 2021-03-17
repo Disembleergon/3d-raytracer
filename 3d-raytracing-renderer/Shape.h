@@ -1,31 +1,31 @@
 #pragma once
 #include "Material.h"
 #include "Matrix.h"
+#include <vector>
 
-struct Shape {
+class Intersection;
+class Ray;
+class Tuple;
 
-	Matrix transform = IDENTITY_MATRIX();
-	Material material{};
+struct Shape
+{
 
-	void operator = (const Shape& sp) {
-		transform = sp.transform;
-		material = sp.material;
-	}
+    Matrix transform = IDENTITY_MATRIX();
+    Material material{};
 
-	bool operator==(const Shape& sp) {
-          return material == sp.material && transform == sp.transform;
-	}
+    void operator=(const Shape *&sp)
+    {
+        transform = sp->transform;
+        material = sp->material;
+    }
 
-	Tuple normal_at(const Tuple& p) {
-		// world space to object space
-		Tuple obj_point = transform.inverse() * p;
-		// compute normal
-		Tuple obj_normal = obj_point - point(0, 0, 0);
-		// object space to world space
-		Tuple world_normal = transform.inverse().transpose() * obj_normal;
-		// has to be Vector
-		world_normal.w = 0;
-		return normalize(world_normal);
-	}
+    bool operator==(const Shape *&sp)
+    {
+        return material == sp->material && transform == sp->transform;
+    }
 
+    Tuple normal_at(const Tuple &);
+    std::vector<Intersection> intersect(Ray);
+    virtual std::vector<Intersection> local_intersect(Ray) = 0;
+    virtual Tuple local_normal_at(const Tuple &) = 0;
 };

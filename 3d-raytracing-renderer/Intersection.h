@@ -6,9 +6,9 @@ struct Intersection
 {
 
     double t;
-    Shape object;
+    Shape* object;
 
-    Intersection(const double &pt, const Shape &ps) : t{pt}, object{ps}
+    Intersection(const double &pt, Shape* ps) : t{pt}, object{ps}
     {
     }
 

@@ -10,7 +10,7 @@ Computations prepare_computations(Intersection i, Ray r)
 
     Tuple point = r.position(i.t);
     Tuple eyev = r.direction() * -1;
-    Tuple normalv = i.object.normal_at(point);
+    Tuple normalv = i.object->normal_at(point);
     Tuple overpoint = point + normalv * EPSILON;
     bool inside = false;
 

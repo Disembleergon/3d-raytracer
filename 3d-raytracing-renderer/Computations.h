@@ -8,7 +8,7 @@ class Ray;
 struct Computations
 {
     double t;
-    Shape object;
+    Shape* object;
     Tuple point;
     Tuple eyev;
     Tuple normalv;
