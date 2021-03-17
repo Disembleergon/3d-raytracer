@@ -8,7 +8,7 @@
 - [X] Light and Shading
 - [X] Making a Scene
 - [X] Shadows
-- [ ] Planes
+- [X] Planes
 - [ ] Patterns
 - [ ] Reflection and Refraction
 - [ ] Cubes
