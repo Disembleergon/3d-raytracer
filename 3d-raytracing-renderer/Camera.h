@@ -7,13 +7,17 @@
 
 class Ray;
 
-struct Camera
+class Camera
 {
 
+  private:
+    Matrix transform = IDENTITY_MATRIX();
+    Matrix inversedTransform = IDENTITY_MATRIX();
+
+  public:
     const int hsize;
     const int vsize;
     const double fov;
-    Matrix transform = IDENTITY_MATRIX();
     double pixel_size;
     double half_width;
     double half_height;
@@ -38,4 +42,7 @@ struct Camera
     }
 
     Ray ray_for_pixel(const int &px, const int &py);
+    void setTransformation(Matrix);
+    Matrix getTransformation();
+    Matrix getInversedTransformation();
 };

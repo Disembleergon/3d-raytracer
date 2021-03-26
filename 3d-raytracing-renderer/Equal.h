@@ -3,5 +3,5 @@
 #include <math.h>
 
 inline bool floatEqual(double a, double b) {
-	return (abs(a - b) < EPSILON);
+	return (fabs(a - b) < EPSILON);
 }

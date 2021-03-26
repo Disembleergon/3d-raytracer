@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Equal.h"
 #include <iostream>
 #include <math.h>
 #include <string>
-#include "Equal.h"
 
 using scalar_t = double;
 
@@ -15,14 +15,8 @@ struct Color
 
     Color normize()
     {
-        /*scalar_t n_red = (red - 0) * (255 / (red_max - 0));
-        scalar_t n_green = (green - 0) * (255 / (green_max - 0));
-        scalar_t n_blue = (blue - 0) * (255 / (blue_max - 0));*/
-
         return Color{floor(red >= 1.0 ? 255 : red * 255), floor(green >= 1.0 ? 255 : green * 255),
                      floor(blue >= 1.0 ? 255 : blue * 255)};
-
-        /* return Color{n_red, n_green, n_blue};*/
     }
 
     bool operator==(const Color &clr)
@@ -54,4 +48,9 @@ inline Color operator*(const Color &clr1, scalar_t scala)
 inline Color operator/(const Color &clr1, const Color &clr2)
 {
     return {clr1.red / clr2.red, clr1.green / clr2.green, clr1.blue / clr2.blue};
+}
+
+inline Color highvalueColor(const scalar_t r, const scalar_t g, const scalar_t b)
+{
+    return Color{r / 255, g / 255, b / 255};
 }

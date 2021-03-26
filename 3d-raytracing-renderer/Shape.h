@@ -7,25 +7,31 @@ class Intersection;
 class Ray;
 class Tuple;
 
-struct Shape
+class Shape
 {
-
+  private:
     Matrix transform = IDENTITY_MATRIX();
+    Matrix inversedTransform = IDENTITY_MATRIX();
+
+  public:
     Material material{};
 
-    void operator=(const Shape *&sp)
+    void operator=(Shape *&sp)
     {
-        transform = sp->transform;
+        setTransform(sp->getTransform());
         material = sp->material;
     }
 
-    bool operator==(const Shape *&sp)
+    bool operator==(Shape *&sp)
     {
-        return material == sp->material && transform == sp->transform;
+        return material == sp->material && transform == sp->getTransform();
     }
 
     Tuple normal_at(const Tuple &);
     std::vector<Intersection> intersect(Ray);
     virtual std::vector<Intersection> local_intersect(Ray) = 0;
     virtual Tuple local_normal_at(const Tuple &) = 0;
+    void setTransform(Matrix);
+    Matrix getTransform();
+    Matrix getInversedTransform();
 };

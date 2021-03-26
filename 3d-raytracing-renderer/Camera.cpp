@@ -17,9 +17,25 @@ Ray Camera::ray_for_pixel(const int &px, const int &py)
     /*	using the camera matrix, transform the canvas point and the origin,
         and then compute the ray's direction vector.
         (remember that the canvas is at z=-1) */
-    Tuple pixel = transform.inverse() * point(world_x, world_y, -1);
-    Tuple origin = transform.inverse() * point(0, 0, 0);
+    Tuple pixel = getInversedTransformation() * point(world_x, world_y, -1);
+    Tuple origin = getInversedTransformation() * point(0, 0, 0);
     Tuple direction = normalize(pixel - origin);
 
     return Ray{origin, direction};
+}
+
+void Camera::setTransformation(Matrix n)
+{
+    transform = n;
+    inversedTransform = n.inverse();
+}
+
+Matrix Camera::getTransformation()
+{
+    return transform;
+}
+
+Matrix Camera::getInversedTransformation()
+{
+    return inversedTransform;
 }

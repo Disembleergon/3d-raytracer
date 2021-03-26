@@ -9,7 +9,7 @@
 Color shade_hit(World &world, Computations &comps)
 {
     bool shadowed = is_shadowed(world, comps.over_point);
-    return lighting(comps.object->material, world.light, comps.point, comps.eyev, comps.normalv, shadowed);
+    return lighting(comps.object->material, comps.object, world.light, comps.point, comps.eyev, comps.normalv, shadowed);
 }
 
 Color color_at(World &world, Ray &r)

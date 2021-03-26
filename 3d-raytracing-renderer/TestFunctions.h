@@ -2,9 +2,9 @@
 #define _USE_MATH_DEFINES
 #define EPSILON 0.00001
 
-#include <math.h>
 #include <fstream>
 #include <iostream>
+#include <math.h>
 
 #include "Camera.h"
 #include "Canvas.h"
@@ -14,11 +14,12 @@
 #include "Intersection.h"
 #include "Material.h"
 #include "Matrix.h"
+#include "Patterns.h"
+#include "Plane.h"
 #include "PointLight.h"
 #include "Ray.h"
 #include "Tuple.h"
 #include "World.h"
-#include "Plane.h"
 
 namespace TESTS
 {
@@ -121,12 +122,12 @@ inline void printComputations(const Computations &cp)
     std::cout << "inside? " << cp.inside << "\n\n";
 }
 
-inline void printCamera(const Camera &cam)
+inline void printCamera(Camera &cam)
 {
     std::cout << "hsize: " << cam.hsize << " ; vsize: " << cam.vsize << " ; fov: " << cam.fov
               << " ; half_width: " << cam.half_width << " ; half_height: " << cam.half_height
               << " ; pixel size: " << cam.pixel_size << " ; transform:\n";
-    TESTS::printMatrix(cam.transform);
+    TESTS::printMatrix(cam.getTransformation());
 }
 
 inline void CanvasTest()
@@ -134,21 +135,21 @@ inline void CanvasTest()
     World world{};
 
     Sphere middle{};
-    middle.transform = translation(-0.5, 1, 0.5);
+    middle.setTransform(translation(-0.5, 1, 0.5));
     middle.material.color = Color{0.1, 1, 0.5};
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
     world.objects.push_back(&middle);
 
     Sphere right{};
-    right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5);
+    right.setTransform(translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5));
     right.material.color = Color{0.5, 1, 0.1};
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
     world.objects.push_back(&right);
 
     Sphere left{};
-    left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33);
+    left.setTransform(translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33));
     left.material.color = Color{1, 0.8, 0.1};
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
@@ -159,9 +160,33 @@ inline void CanvasTest()
 
     world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
     Camera cam{100, 50, M_PI / 3};
-    cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
+    cam.setTransformation(view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
 
     world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
+}
+
+inline void ringPatternTest()
+{
+    World w{};
+
+    Sphere sp{};
+    sp.material.pattern = new RingPattern{Color{1, 1, 1}, highvalueColor(245, 130, 255)};
+    sp.material.pattern->setTransform(scaling(1, 0.15, 1) * rotate_z(toRadians(90)));
+    sp.material.specular = 0.9;
+    sp.material.diffuse = 0.7;
+    sp.material.ambient = 0.6;
+    sp.setTransform(translation(0, 1, 0));
+    w.objects.push_back(&sp);
+
+    Plane underground{};
+    w.objects.push_back(&underground);
+
+    w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
+
+    Camera cam{600, 300, M_PI / 3};
+    cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
+
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 }
 
 } // namespace TESTS

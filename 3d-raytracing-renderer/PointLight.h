@@ -5,6 +5,7 @@
 #include <math.h>
 
 class Material;
+class Shape;
 
 struct PointLight
 {
@@ -13,5 +14,5 @@ struct PointLight
     Color intensity{0, 0, 0};
 };
 
-Color lighting(const Material &mat, const PointLight &light, const Tuple &poi, const Tuple &eyev, const Tuple &normalv,
+Color lighting(const Material &mat, Shape*, const PointLight &light, const Tuple &poi, const Tuple &eyev, const Tuple &normalv,
                const bool in_shadow);

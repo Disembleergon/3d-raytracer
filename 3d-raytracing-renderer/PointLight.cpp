@@ -1,12 +1,19 @@
 #include "PointLight.h"
 #include "Material.h"
+#include "Pattern.h"
+#include "Shape.h"
+#include "Tuple.h"
 
-Color lighting(const Material &mat, const PointLight &light, const Tuple &poi, const Tuple &eyev, const Tuple &normalv,
+Color lighting(const Material &mat, Shape* object, const PointLight &light, const Tuple &poi, const Tuple &eyev, const Tuple &normalv,
                const bool in_shadow)
 {
 
     // combine the surface color with the light's color/intensity
     Color effective_color = mat.color * light.intensity;
+
+    // integrate patterns
+    if (mat.pattern != nullptr)
+        effective_color = mat.pattern->pattern_at_shape(poi, object);
 
     // find the direction to the light source
     Tuple lightv = normalize(light.position - poi);

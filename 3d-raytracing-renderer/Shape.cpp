@@ -4,9 +4,9 @@
 
 Tuple Shape::normal_at(const Tuple &p)
 {
-    Tuple local_point = transform.inverse() * p;
+    Tuple local_point = getInversedTransform() * p;
     Tuple local_normal = local_normal_at(local_point);
-    Tuple world_normal = transform.inverse().transpose() * local_normal;
+    Tuple world_normal = getInversedTransform().transpose() * local_normal;
     world_normal.w = 0;
 
     return normalize(world_normal);
@@ -14,6 +14,22 @@ Tuple Shape::normal_at(const Tuple &p)
 
 IntersectionList Shape::intersect(Ray r)
 {
-    Ray lr = r.transform(transform.inverse());
+    Ray lr = r.transform(getInversedTransform());
     return this->local_intersect(lr);
+}
+
+void Shape::setTransform(Matrix n)
+{
+    transform = n;
+    inversedTransform = n.inverse();
+}
+
+Matrix Shape::getTransform()
+{
+    return transform;
+}
+
+Matrix Shape::getInversedTransform()
+{
+    return inversedTransform;
 }

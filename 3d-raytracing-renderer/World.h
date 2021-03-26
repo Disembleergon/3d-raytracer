@@ -34,7 +34,7 @@ inline World DEFAULT_WORLD()
     s1.material = m1;
 
     Sphere s2{};
-    s2.transform = scaling(0.5, 0.5, 0.5);
+    s2.setTransform(scaling(0.5, 0.5, 0.5));
 
     out.objects.push_back(&s1);
     out.objects.push_back(&s2);
