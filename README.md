@@ -19,3 +19,6 @@
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
 
 ![progress bar](https://progress-bar.dev/59)
+
+# Optional
+- add more Patterns
