@@ -53,11 +53,11 @@ public:
         m_elements[row][col] = value;
     }
 
-    const element_type& get(const unsigned int& row, const unsigned int& col) const {
+    const element_type get(const unsigned int& row, const unsigned int& col) const {
         return m_elements[row][col];
     }
 
-    element_type& get(size_type row, size_type col) {
+    element_type get(size_type row, size_type col) {
         return m_elements[row][col];
     }
 

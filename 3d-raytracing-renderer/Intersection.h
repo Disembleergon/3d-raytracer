@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <vector>
+#include "Shape.h"
 
 struct Intersection
 {

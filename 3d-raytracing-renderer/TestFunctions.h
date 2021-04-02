@@ -120,6 +120,8 @@ inline void printComputations(const Computations &cp)
     TESTS::printTuple(cp.over_point);
     std::cout << "t: " << cp.t << std::endl;
     std::cout << "inside? " << cp.inside << "\n\n";
+    std::cout << "reflectv: " << std::endl;
+    TESTS::printTuple(cp.reflectv);
 }
 
 inline void printCamera(Camera &cam)
@@ -139,6 +141,7 @@ inline void CanvasTest()
     middle.material.color = Color{0.1, 1, 0.5};
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
+    middle.material.reflective = 0.6;
     world.objects.push_back(&middle);
 
     Sphere right{};
@@ -146,6 +149,7 @@ inline void CanvasTest()
     right.material.color = Color{0.5, 1, 0.1};
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
+    //right.material.reflective = 1;
     world.objects.push_back(&right);
 
     Sphere left{};
@@ -153,40 +157,17 @@ inline void CanvasTest()
     left.material.color = Color{1, 0.8, 0.1};
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
+    //left.material.reflective = 1;
     world.objects.push_back(&left);
 
     Plane underground{};
     world.objects.push_back(&underground);
 
     world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
-    Camera cam{100, 50, M_PI / 3};
+    Camera cam{800, 400, M_PI / 3};
     cam.setTransformation(view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
 
     world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
-}
-
-inline void ringPatternTest()
-{
-    World w{};
-
-    Sphere sp{};
-    sp.material.pattern = new RingPattern{Color{1, 1, 1}, highvalueColor(245, 130, 255)};
-    sp.material.pattern->setTransform(scaling(1, 0.15, 1) * rotate_z(toRadians(90)));
-    sp.material.specular = 0.9;
-    sp.material.diffuse = 0.7;
-    sp.material.ambient = 0.6;
-    sp.setTransform(translation(0, 1, 0));
-    w.objects.push_back(&sp);
-
-    Plane underground{};
-    w.objects.push_back(&underground);
-
-    w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
-
-    Camera cam{600, 300, M_PI / 3};
-    cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
-
-    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 }
 
 } // namespace TESTS

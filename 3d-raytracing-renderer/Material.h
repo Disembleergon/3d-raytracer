@@ -12,6 +12,7 @@ struct Material
     member_t shininess{200};
     Color color{1, 1, 1};
     Pattern *pattern;
+    member_t reflective = 0;
 
     bool operator==(const Material &m)
     {

@@ -26,10 +26,10 @@ void Shape::setTransform(Matrix n)
 
 Matrix Shape::getTransform()
 {
-    return transform;
+    return this->transform;
 }
 
 Matrix Shape::getInversedTransform()
 {
-    return inversedTransform;
+    return this->inversedTransform;
 }

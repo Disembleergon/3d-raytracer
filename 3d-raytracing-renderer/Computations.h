@@ -14,6 +14,7 @@ struct Computations
     Tuple normalv;
     bool inside;
     Tuple over_point;
+    Tuple reflectv;
 };
 
 Computations prepare_computations(Intersection i, Ray r);

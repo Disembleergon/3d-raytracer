@@ -4,8 +4,9 @@
 #include "PointLight.h"
 #include "Matrix.h"
 #include "Sphere.h"
+#include "Shape.h"
 
-class Shape;
+//class Shape;
 class Computations;
 class Ray;
 class Canvas;
@@ -34,7 +35,7 @@ inline World DEFAULT_WORLD()
     s1.material = m1;
 
     Sphere s2{};
-    s2.setTransform(scaling(0.5, 0.5, 0.5));
+    //s2.setTransform(scaling(0.5, 0.5, 0.5));
 
     out.objects.push_back(&s1);
     out.objects.push_back(&s2);
@@ -43,9 +44,12 @@ inline World DEFAULT_WORLD()
 }
 
 // calculate lighting with computations
-Color shade_hit(World &world, Computations &comps);
+Color shade_hit(World &world, Computations &comps, const int& remaining);
 
 // bring everything together (calculating color based on a ray and the world)
-Color color_at(World &world, Ray &r);
+Color color_at(World &world, Ray &r, const int remaining = 4);
 
 bool is_shadowed(World &world, Tuple &p);
+
+// reflection algorithm
+Color reflected_color(World &, Computations &, const int& remaining);

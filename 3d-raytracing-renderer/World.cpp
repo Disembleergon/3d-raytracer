@@ -1,18 +1,24 @@
 #include "World.h"
-#include "Computations.h"
-#include "Ray.h"
-#include "Intersection.h"
-#include "Canvas.h"
-#include "Progressbar.hpp"
 #include "Camera.h"
+#include "Canvas.h"
+#include "Computations.h"
+#include "Intersection.h"
+#include "Progressbar.hpp"
+#include "Ray.h"
 
-Color shade_hit(World &world, Computations &comps)
+//Color reflected_color(World &w, Computations &comps, int remaining);
+
+Color shade_hit(World &world, Computations &comps, const int& remaining)
 {
     bool shadowed = is_shadowed(world, comps.over_point);
-    return lighting(comps.object->material, comps.object, world.light, comps.point, comps.eyev, comps.normalv, shadowed);
+    auto surface =
+        lighting(comps.object->material, comps.object, world.light, comps.point, comps.eyev, comps.normalv, shadowed);
+    auto reflected = reflected_color(world, comps, remaining);
+
+    return surface + reflected;
 }
 
-Color color_at(World &world, Ray &r)
+Color color_at(World &world, Ray &r, const int remaining)
 {
     IntersectionList xs = r.intersect_world(world);
     Intersection i = hit(xs);
@@ -21,7 +27,7 @@ Color color_at(World &world, Ray &r)
         return Color{};
 
     Computations tcomps = prepare_computations(i, r);
-    return shade_hit(world, tcomps);
+    return shade_hit(world, tcomps, remaining);
 }
 
 Canvas World::render(Camera &cam)
@@ -34,7 +40,7 @@ Canvas World::render(Camera &cam)
         for (int x = 0; x < cam.hsize; x++)
         {
             Ray r = cam.ray_for_pixel(x, y);
-            Color clr = color_at(*this, r);
+            Color clr = color_at(*this, r, 4);
 
             image.write_pixel(x, y, clr.normize());
             ++pb;
@@ -59,4 +65,19 @@ bool is_shadowed(World &world, Tuple &p)
     if (h.isDefined() && h.t < distance)
         return true;
     return false;
+}
+
+Color reflected_color(World &w, Computations &comps, const int& remaining)
+{
+
+    if (remaining <= 0)
+        return Color{}; // black
+
+    if (comps.object->material.reflective == 0)
+        return Color{}; // black
+
+    Ray reflect_ray{comps.over_point, comps.reflectv};
+    Color clr = color_at(w, reflect_ray, remaining-1);
+
+    return clr * comps.object->material.reflective;
 }

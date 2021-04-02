@@ -16,13 +16,13 @@ class Shape
   public:
     Material material{};
 
-    void operator=(Shape *&sp)
+    void operator=(Shape *sp)
     {
         setTransform(sp->getTransform());
         material = sp->material;
     }
 
-    bool operator==(Shape *&sp)
+    bool operator==(Shape *sp)
     {
         return material == sp->material && transform == sp->getTransform();
     }

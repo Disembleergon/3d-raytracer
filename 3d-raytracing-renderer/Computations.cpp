@@ -21,5 +21,7 @@ Computations prepare_computations(Intersection i, Ray r)
         normalv = normalv * -1;
     }
 
-    return Computations{i.t, i.object, point, eyev, normalv, inside, overpoint};
+    Tuple reflectv = reflect(r.direction(), normalv);
+
+    return Computations{i.t, i.object, point, eyev, normalv, inside, overpoint, reflectv};
 }
