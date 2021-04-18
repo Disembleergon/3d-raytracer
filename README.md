@@ -17,3 +17,8 @@
 - [ ] Triangles
 - [ ] Constructive Solid Geometry (CSG)
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
+
+<br>![progressbar](https://progress-bar.dev/59)
+<br>
+# Optional
+- add more patterns
