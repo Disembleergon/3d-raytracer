@@ -9,7 +9,7 @@
 - [X] Making a Scene
 - [X] Shadows
 - [X] Planes
-- [ ] Patterns
+- [X] Patterns
 - [ ] Reflection and Refraction
 - [ ] Cubes
 - [ ] Cylinders
