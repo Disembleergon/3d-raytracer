@@ -12,16 +12,16 @@ Tuple Shape::normal_at(const Tuple &p)
     return normalize(world_normal);
 }
 
-IntersectionList Shape::intersect(Ray r)
+IntersectionList Shape::intersect(Ray& r)
 {
-    Ray lr = r.transform(getInversedTransform());
+    Ray lr = r.transform(this->getInversedTransform());
     return this->local_intersect(lr);
 }
 
 void Shape::setTransform(Matrix n)
 {
     transform = n;
-    inversedTransform = n.inverse();
+    inversedTransform = transform.inverse();
 }
 
 Matrix Shape::getTransform()

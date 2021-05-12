@@ -16,6 +16,8 @@ class Shape
   public:
     Material material{};
 
+    Shape() = default;
+
     void operator=(Shape *sp)
     {
         setTransform(sp->getTransform());
@@ -28,7 +30,7 @@ class Shape
     }
 
     Tuple normal_at(const Tuple &);
-    std::vector<Intersection> intersect(Ray);
+    std::vector<Intersection> intersect(Ray&);
     virtual std::vector<Intersection> local_intersect(Ray) = 0;
     virtual Tuple local_normal_at(const Tuple &) = 0;
     void setTransform(Matrix);

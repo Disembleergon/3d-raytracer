@@ -28,7 +28,7 @@ int main()
     Plane obj{};
     obj.material.reflective = 0.5;
     obj.setTransform(translation(0, -1, 0));
-    w.objects.push_back(&obj);
+    w.addShape<Plane>(obj);
 
     Ray r{point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2)};
     Intersection i{sqrt(2), &obj};

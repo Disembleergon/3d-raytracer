@@ -142,7 +142,7 @@ inline void CanvasTest()
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
     middle.material.reflective = 0.6;
-    world.objects.push_back(&middle);
+    world.addShape<Sphere>(middle);
 
     Sphere right{};
     right.setTransform(translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5));
@@ -150,7 +150,7 @@ inline void CanvasTest()
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
     //right.material.reflective = 1;
-    world.objects.push_back(&right);
+    world.addShape<Sphere>(right);
 
     Sphere left{};
     left.setTransform(translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33));
@@ -158,10 +158,10 @@ inline void CanvasTest()
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
     //left.material.reflective = 1;
-    world.objects.push_back(&left);
+    world.addShape<Sphere>(left);
 
     Plane underground{};
-    world.objects.push_back(&underground);
+    world.addShape<Plane>(underground);
 
     world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
     Camera cam{800, 400, M_PI / 3};
