@@ -18,7 +18,11 @@
 - [ ] Constructive Solid Geometry (CSG)
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
 
+<<<<<<< HEAD
 <br>![progressbar](https://progress-bar.dev/59)
 <br>
 # Optional
 - add more patterns
+=======
+![progress bar](https://progress-bar.dev/59)
+>>>>>>> e9a5908 (Update README.md)

@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include <iostream>
+
 using element_type = double;
 using elementlist = std::vector<std::vector<element_type>>;
 
@@ -61,7 +63,6 @@ class Matrix
     {
         return m_elements;
     };
-
     void resize(const int &rows, const int &cols)
     {
         m_rows = rows;
