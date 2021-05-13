@@ -1,6 +1,6 @@
 #include "Ray.h"
-#include "Shape.h"
 #include "Intersection.h"
+#include "Shape.h"
 #include "World.h"
 
 #include <algorithm>

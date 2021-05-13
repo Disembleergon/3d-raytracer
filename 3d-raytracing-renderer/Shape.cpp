@@ -12,7 +12,7 @@ Tuple Shape::normal_at(const Tuple &p)
     return normalize(world_normal);
 }
 
-IntersectionList Shape::intersect(Ray r)
+IntersectionList Shape::intersect(Ray& r)
 {
     Ray lr = r.transform(getInversedTransform());
     return this->local_intersect(lr);
