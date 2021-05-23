@@ -15,14 +15,19 @@ class Camera;
 
 struct World
 {
-    std::vector<std::shared_ptr<Shape>> objects{};
+    std::vector<std::unique_ptr<Shape>> objects{};
     PointLight light;
+
+    World() = default;
+
+    //World &operator=(const World &) = delete;
+    //World(const World &) = delete;
 
     Canvas render(Camera &);
 
     template <class ShapeType> void addShape(const ShapeType &shape)
     {
-        objects.emplace_back(std::make_shared<ShapeType>(shape));
+        objects.emplace_back(std::make_unique<ShapeType>(shape));
     }
 };
 

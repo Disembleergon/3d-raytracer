@@ -35,6 +35,6 @@ public:
 		return Ray{ m * m_origin, m * m_direction };
 	}
 
-	std::vector<Intersection> intersect_world(World);
+	std::vector<Intersection> intersect_world(World&);
 
 };

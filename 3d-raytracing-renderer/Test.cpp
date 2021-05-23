@@ -22,7 +22,7 @@ int main()
     cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");*/
 
-    World w = DEFAULT_WORLD();
+    /*World w = DEFAULT_WORLD();
 
     Plane obj{};
     obj.material.reflective = 0.5;
@@ -34,7 +34,9 @@ int main()
     Computations comps = prepare_computations(i, r);
 
     Color clr = shade_hit(w, comps, 4);
-    TESTS::printColor(clr);
+    TESTS::printColor(clr);*/
+
+    TESTS::CanvasTest();
 
     system("pause");
     return 0;

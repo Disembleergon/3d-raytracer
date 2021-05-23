@@ -22,15 +22,16 @@ class Shape
     virtual ~Shape() = default;
     Shape() = default;
 
-    /*void operator=(Shape *sp)
+    void operator=(Shape *sp)
     {
         setTransform(sp->getTransform());
         material = sp->material;
-    }*/
+    }
 
-    bool operator==(const Shape &sp)
+    bool operator==(Shape &sp)
     {
-        return shape_id == sp.shape_id;
+        //return shape_id == sp.shape_id;
+      return material == sp.material && transform == sp.getTransform();
     }
 
     Tuple normal_at(const Tuple &);
