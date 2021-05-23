@@ -1,15 +1,15 @@
 #pragma once
+#include "Shape.h"
 #include <algorithm>
 #include <vector>
-#include "Shape.h"
 
 struct Intersection
 {
 
     double t;
-    Shape* object;
+    Shape *object;
 
-    Intersection(const double &pt, Shape* ps) : t{pt}, object{ps}
+    Intersection(const double &pt, Shape *ps) : t{pt}, object{ps}
     {
     }
 
@@ -25,8 +25,9 @@ struct Intersection
         return t > i.t;
     }
 
-    bool operator==(const Intersection& i) {
-      return t == i.t && object == i.object;
+    bool operator==(const Intersection &i)
+    {
+        return t == i.t && object == i.object;
     }
 
     /*void operator = (Intersection& i) {
