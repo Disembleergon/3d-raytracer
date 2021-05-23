@@ -3,7 +3,7 @@
 int main()
 {
 
-    World w{};
+    /*World w{};
 
     Sphere sp{};
     sp.material.reflective = 1;
@@ -20,9 +20,9 @@ int main()
 
     Camera cam{400, 200, M_PI / 3};
     cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
-    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");*/
 
-    /*World w = DEFAULT_WORLD();
+    World w = DEFAULT_WORLD();
 
     Plane obj{};
     obj.material.reflective = 0.5;
@@ -34,7 +34,7 @@ int main()
     Computations comps = prepare_computations(i, r);
 
     Color clr = shade_hit(w, comps, 4);
-    TESTS::printColor(clr);*/
+    TESTS::printColor(clr);
 
     system("pause");
     return 0;
