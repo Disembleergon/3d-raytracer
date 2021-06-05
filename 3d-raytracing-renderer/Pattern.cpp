@@ -6,7 +6,7 @@
 Color Pattern::pattern_at_shape(Tuple world_point, Shape *object)
 {
     Tuple object_point = object->getInversedTransform() * world_point;
-    Tuple pattern_point = getInversedTransform() * object_point;
+    Tuple pattern_point = inversedTransform * object_point;
 
     return pattern_at(pattern_point);
 }

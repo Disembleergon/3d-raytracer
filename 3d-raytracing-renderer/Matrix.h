@@ -45,7 +45,7 @@ class Matrix
         {
             if (row.size() != m_cols)
             {
-                throw std::logic_error{"Matrix hat Zeilen mit unterschiedlich langen Zeilen"};
+                throw std::logic_error{"Matrix hat Zeilen mit unterschiedlich langen Spalten"};
             }
             m_elements.push_back(row);
         }
@@ -77,7 +77,6 @@ class Matrix
 
     const element_type get(const unsigned int &row, const unsigned int &col) const
     {
-       // 14356594x1435694
         return m_elements[row][col];
     }
 
@@ -156,11 +155,13 @@ class Matrix
     Tuple operator*(const Tuple &tup)
     {
 
+        if (m_rows != 4 || m_cols != 4)
+            throw std::logic_error("Matrix isn't a 4x4 Matrix");
+
         std::array<element_type, 4> result{};
 
         for (int i = 0; i < 4; i++)
         {
-          // 14356594x1435694
             result[i] = get(i, 0) * tup.x + get(i, 1) * tup.y + get(i, 2) * tup.z + get(i, 3) * tup.w;
         }
 
