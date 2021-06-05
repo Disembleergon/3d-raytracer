@@ -30,8 +30,7 @@ class Shape
 
     bool operator==(Shape &sp)
     {
-        //return shape_id == sp.shape_id;
-      return material == sp.material && transform == sp.getTransform();
+        return shape_id == sp.shape_id;
     }
 
     Tuple normal_at(const Tuple &);

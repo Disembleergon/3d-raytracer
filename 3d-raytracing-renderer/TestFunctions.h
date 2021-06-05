@@ -141,7 +141,7 @@ inline void CanvasTest()
     middle.material.color = Color{0.1, 1, 0.5};
     middle.material.diffuse = 0.7;
     middle.material.specular = 0.3;
-    middle.material.reflective = 0.6;
+    //middle.material.reflective = 0.6;
     world.addShape<Sphere>(middle);
 
     Sphere right{};
