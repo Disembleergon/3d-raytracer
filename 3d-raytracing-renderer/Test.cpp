@@ -7,8 +7,8 @@ int main()
 
     Sphere sp{};
     sp.material.pattern =
-        new PerlinNoisePattern{new GradientPattern{highvalueColor(62, 107, 98), highvalueColor(178, 192, 161)}};
-    // sp.material.pattern->setTransform(rotate_z(toRadians(45)) * translation(-0.6, 0, 0));
+        new JitteredPattern{new StripePattern{highvalueColor(62, 107, 98), highvalueColor(178, 192, 161)}, 0.6};
+    sp.material.pattern->setTransform(rotate_z(toRadians(50)) * scaling(0.4, 0.4, 0.4));
     sp.material.specular = 0.9;
     sp.material.diffuse = 0.7;
     sp.material.ambient = 0.6;
@@ -17,9 +17,10 @@ int main()
 
     Plane underground{};
 
-    auto sOne = StripePattern{highvalueColor(255, 255, 255), highvalueColor(11, 143, 14)};
-    auto sTwo = StripePattern{highvalueColor(11, 143, 14), highvalueColor(255, 255, 255)};
-    sTwo.setTransform(rotate_y(toRadians(90)));
+    auto sOne = JitteredPattern{new StripePattern{highvalueColor(158, 201, 212), highvalueColor(66, 91, 123)}, 0.6};
+    auto sTwo = StripePattern{highvalueColor(66, 91, 123), highvalueColor(158, 201, 212)};
+    sTwo.setTransform(rotate_y(toRadians(90)) * scaling(0.7, 0.7, 0.7));
+    sOne.setTransform(scaling(0.7, 0.7, 0.7));
 
     underground.material.pattern = new BlendPattern{&sOne, &sTwo};
     w.objects.push_back(&underground);

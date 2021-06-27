@@ -66,6 +66,7 @@ class PerlinNoisePattern : public Pattern
 {
   private:
     Pattern *p;
+    float scaleValue = 0;
 
   public:
     PerlinNoisePattern(Pattern *pattern) : p{pattern}
@@ -73,7 +74,38 @@ class PerlinNoisePattern : public Pattern
         // empty
     }
 
+    PerlinNoisePattern(Pattern *pattern, float scale) : p{pattern}, scaleValue{scale}
+    {
+        // empty
+    }
+
     ~PerlinNoisePattern()
+    {
+        delete p;
+        p = nullptr;
+    }
+
+    Color pattern_at(Tuple) override;
+};
+
+class JitteredPattern : public Pattern
+{
+  private:
+    Pattern *p;
+    float scaleValue = 0.01;
+
+  public:
+    JitteredPattern(Pattern *pattern) : p{pattern}
+    {
+        // empty
+    }
+
+    JitteredPattern(Pattern *pattern, float scale) : p{pattern}, scaleValue{scale}
+    {
+        // empty
+    }
+
+    ~JitteredPattern()
     {
         delete p;
         p = nullptr;
