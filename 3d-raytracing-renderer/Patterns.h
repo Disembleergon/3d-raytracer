@@ -81,3 +81,26 @@ class PerlinNoisePattern : public Pattern
 
     Color pattern_at(Tuple) override;
 };
+
+class BlendPattern : public Pattern
+{
+  private:
+    Pattern *a;
+    Pattern *b;
+
+  public:
+    BlendPattern(Pattern *pA, Pattern *pB) : a{pA}, b{pB}
+    {
+        // empty
+    }
+
+    ~BlendPattern()
+    {
+        delete a;
+        delete b;
+        a = nullptr;
+        b = nullptr;
+    }
+
+    Color pattern_at(Tuple) override;
+};

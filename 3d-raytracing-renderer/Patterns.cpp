@@ -46,3 +46,10 @@ Color PerlinNoisePattern::pattern_at(Tuple pnt)
     auto disturbedPoint = point(pnt.x + distortion, pnt.y + distortion, pnt.z + distortion);
     return p->pattern_at(p->getInversedTransform() * disturbedPoint);
 }
+
+Color BlendPattern::pattern_at(Tuple p)
+{
+    auto clrA = a->pattern_at(a->getInversedTransform() * p);
+    auto clrB = b->pattern_at(b->getInversedTransform() * p);
+    return (clrA + clrB) * 0.5f;
+}
