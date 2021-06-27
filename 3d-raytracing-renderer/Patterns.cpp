@@ -1,5 +1,6 @@
 #include "Patterns.h"
 #include "Shape.h"
+#include "SimplexNoise.h"
 #include "Tuple.h"
 
 #include <math.h>
@@ -36,4 +37,12 @@ Color CheckersPattern::pattern_at(Tuple p)
     if (static_cast<int>(std::floor(p.x) + std::floor(p.y) + std::floor(p.z)) % 2 == 0)
         return a;
     return b;
+}
+
+Color PerlinNoisePattern::pattern_at(Tuple pnt)
+{
+    SimplexNoise noise{};
+    const float distortion = noise.Noise(pnt.x, pnt.y, pnt.z);
+    auto disturbedPoint = point(pnt.x + distortion, pnt.y + distortion, pnt.z + distortion);
+    return p->pattern_at(p->getInversedTransform() * disturbedPoint);
 }

@@ -61,3 +61,23 @@ class CheckersPattern : public Pattern
 
     Color pattern_at(Tuple) override;
 };
+
+class PerlinNoisePattern : public Pattern
+{
+  private:
+    Pattern *p;
+
+  public:
+    PerlinNoisePattern(Pattern *pattern) : p{pattern}
+    {
+        // empty
+    }
+
+    ~PerlinNoisePattern()
+    {
+        delete p;
+        p = nullptr;
+    }
+
+    Color pattern_at(Tuple) override;
+};
