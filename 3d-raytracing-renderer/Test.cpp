@@ -6,9 +6,8 @@ int main()
     World w{};
 
     Sphere sp{};
-    sp.material.pattern =
-        new PerlinNoisePattern{new GradientPattern{highvalueColor(235, 129, 9), highvalueColor(10, 13, 201)}};
-    sp.material.pattern->setTransform(rotate_z(toRadians(45)) * translation(-0.6, 0, 0));
+    sp.material.pattern = new PerlinNoisePattern{new RingPattern{highvalueColor(104, 79, 163), Color{1, 1, 1}}};
+    // sp.material.pattern->setTransform(rotate_z(toRadians(45)) * translation(-0.6, 0, 0));
     sp.material.specular = 0.9;
     sp.material.diffuse = 0.7;
     sp.material.ambient = 0.6;
