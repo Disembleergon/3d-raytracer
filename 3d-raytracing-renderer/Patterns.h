@@ -65,24 +65,18 @@ class CheckersPattern : public Pattern
 class PerlinNoisePattern : public Pattern
 {
   private:
-    Pattern *p;
+    pattern_ptr p;
     float scaleValue = 0;
 
   public:
-    PerlinNoisePattern(Pattern *pattern) : p{pattern}
+    PerlinNoisePattern(pattern_ptr pattern) : p{pattern}
     {
         // empty
     }
 
-    PerlinNoisePattern(Pattern *pattern, float scale) : p{pattern}, scaleValue{scale}
+    PerlinNoisePattern(pattern_ptr pattern, float scale) : p{pattern}, scaleValue{scale}
     {
         // empty
-    }
-
-    ~PerlinNoisePattern()
-    {
-        delete p;
-        p = nullptr;
     }
 
     Color pattern_at(Tuple) override;
@@ -91,24 +85,18 @@ class PerlinNoisePattern : public Pattern
 class JitteredPattern : public Pattern
 {
   private:
-    Pattern *p;
+    pattern_ptr p;
     float scaleValue = 0.01;
 
   public:
-    JitteredPattern(Pattern *pattern) : p{pattern}
+    JitteredPattern(pattern_ptr pattern) : p{pattern}
     {
         // empty
     }
 
-    JitteredPattern(Pattern *pattern, float scale) : p{pattern}, scaleValue{scale}
+    JitteredPattern(pattern_ptr pattern, float scale) : p{pattern}, scaleValue{scale}
     {
         // empty
-    }
-
-    ~JitteredPattern()
-    {
-        delete p;
-        p = nullptr;
     }
 
     Color pattern_at(Tuple) override;
@@ -117,21 +105,13 @@ class JitteredPattern : public Pattern
 class BlendPattern : public Pattern
 {
   private:
-    Pattern *a;
-    Pattern *b;
+    pattern_ptr a;
+    pattern_ptr b;
 
   public:
     BlendPattern(Pattern *pA, Pattern *pB) : a{pA}, b{pB}
     {
         // empty
-    }
-
-    ~BlendPattern()
-    {
-        delete a;
-        delete b;
-        a = nullptr;
-        b = nullptr;
     }
 
     Color pattern_at(Tuple) override;
