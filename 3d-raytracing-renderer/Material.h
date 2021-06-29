@@ -11,13 +11,11 @@ struct Material
     member_t specular{0.9};
     member_t shininess{200};
     Color color{1, 1, 1};
-    Pattern *pattern;
-    member_t reflective = 0;
+    pattern_ptr pattern;
 
     bool operator==(const Material &m)
     {
-      return ambient == m.ambient && diffuse == m.diffuse &&
-             specular == m.specular && shininess == m.shininess &&
-             color == m.color;
+        return ambient == m.ambient && diffuse == m.diffuse && specular == m.specular && shininess == m.shininess &&
+               color == m.color;
     }
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include "Matrix.h"
-//#include "Shape.h"
+#include <memory>
 
 class Color;
 class Tuple;
@@ -19,3 +19,5 @@ class Pattern
     Matrix getTransform();
     Matrix getInversedTransform();
 };
+
+using pattern_ptr = std::shared_ptr<Pattern>;
