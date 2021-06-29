@@ -5,11 +5,11 @@
 class StripePattern : public Pattern
 {
   private:
-    const Color a;
-    const Color b;
+    pattern_ptr a;
+    pattern_ptr b;
 
   public:
-    StripePattern(const Color pA, const Color pB) : a{pA}, b{pB}
+    StripePattern(pattern_ptr pA, pattern_ptr pB) : a{pA}, b{pB}
     {
         // empty
     }
@@ -35,11 +35,11 @@ class GradientPattern : public Pattern
 class RingPattern : public Pattern
 {
   private:
-    const Color a;
-    const Color b;
+    pattern_ptr a;
+    pattern_ptr b;
 
   public:
-    RingPattern(const Color pA, const Color pB) : a{pA}, b{pB}
+    RingPattern(pattern_ptr pA, pattern_ptr pB) : a{pA}, b{pB}
     {
         // empty
     }
@@ -50,11 +50,11 @@ class RingPattern : public Pattern
 class CheckersPattern : public Pattern
 {
   private:
-    const Color a;
-    const Color b;
+    pattern_ptr a;
+    pattern_ptr b;
 
   public:
-    CheckersPattern(const Color pA, const Color pB) : a{pA}, b{pB}
+    CheckersPattern(pattern_ptr pA, pattern_ptr pB) : a{pA}, b{pB}
     {
         // empty
     }
@@ -109,10 +109,30 @@ class BlendPattern : public Pattern
     pattern_ptr b;
 
   public:
-    BlendPattern(Pattern *pA, Pattern *pB) : a{pA}, b{pB}
+    BlendPattern(pattern_ptr pA, pattern_ptr pB) : a{pA}, b{pB}
     {
         // empty
     }
 
     Color pattern_at(Tuple) override;
 };
+
+class SolidPattern : public Pattern
+{
+  private:
+    const Color clr;
+
+  public:
+    SolidPattern(const Color clr) : clr{clr}
+    {
+        // empty
+    }
+
+    Color pattern_at(Tuple) override;
+};
+
+// create pattern_ptr. requires a Pattern trype in template
+template <typename T> pattern_ptr makePattern_ptr(T p)
+{
+    return std::make_shared<T>(p);
+}

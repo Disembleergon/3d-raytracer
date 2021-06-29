@@ -8,8 +8,8 @@
 Color StripePattern::pattern_at(Tuple p)
 {
     if (static_cast<int>(std::floor(p.x)) % 2 == 0)
-        return a;
-    return b;
+        return a->pattern_at(a->getInversedTransform() * p);
+    return b->pattern_at(b->getInversedTransform() * p);
 }
 
 Color GradientPattern::pattern_at(Tuple p)
@@ -28,15 +28,15 @@ Color RingPattern::pattern_at(Tuple p)
     const double squareroot = sqrtf(powX + powZ);
 
     if (static_cast<int>(std::floor(squareroot)) % 2 == 0)
-        return a;
-    return b;
+        return a->pattern_at(a->getInversedTransform() * p);
+    return b->pattern_at(b->getInversedTransform() * p);
 }
 
 Color CheckersPattern::pattern_at(Tuple p)
 {
     if (static_cast<int>(std::floor(p.x) + std::floor(p.y) + std::floor(p.z)) % 2 == 0)
-        return a;
-    return b;
+        return a->pattern_at(a->getInversedTransform() * p);
+    return b->pattern_at(b->getInversedTransform() * p);
 }
 
 Color PerlinNoisePattern::pattern_at(Tuple pnt)
@@ -63,4 +63,9 @@ Color JitteredPattern::pattern_at(Tuple pnt)
     auto newPoint = point(newX, newY, newZ);
 
     return p->pattern_at(p->getInversedTransform() * newPoint);
+}
+
+Color SolidPattern::pattern_at(Tuple p)
+{
+    return clr;
 }
