@@ -12,7 +12,8 @@ int main()
     auto sphereStripe =
         StripePattern{makePattern_ptr<SolidPattern>(sphereSolid1), makePattern_ptr<SolidPattern>(sphereSolid2)};
 
-    sp.material.pattern = new JitteredPattern{makePattern_ptr<StripePattern>(sphereStripe), 0.6};
+    sp.material.pattern =
+        makePattern_ptr<JitteredPattern>(JitteredPattern{makePattern_ptr<StripePattern>(sphereStripe), 0.6});
     sp.material.pattern->setTransform(rotate_z(toRadians(50)) * scaling(0.4, 0.4, 0.4));
     sp.material.specular = 0.9;
     sp.material.diffuse = 0.7;
@@ -36,8 +37,8 @@ int main()
 
     // pattern config end
 
-    underground.material.pattern =
-        new BlendPattern{makePattern_ptr<JitteredPattern>(sOne), makePattern_ptr<StripePattern>(sTwo)};
+    underground.material.pattern = makePattern_ptr<BlendPattern>(
+        BlendPattern{makePattern_ptr<JitteredPattern>(sOne), makePattern_ptr<StripePattern>(sTwo)});
     w.objects.push_back(&underground);
 
     w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
