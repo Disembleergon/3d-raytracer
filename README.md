@@ -21,4 +21,4 @@
 <br>![progressbar](https://progress-bar.dev/59)
 <br>
 # Optional
-- add more patterns
+- improve performance
