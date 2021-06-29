@@ -3,7 +3,7 @@
 int main()
 {
 
-    /*World w{};
+    World w{};
 
     Plane ground{};
 
@@ -24,11 +24,11 @@ int main()
 
     // ---- pattern end -----
 
-    w.objects.push_back(&ground);
+    w.addShape<Plane>(ground);
 
     w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
 
-    Camera cam{1200, 600, M_PI / 3};
+    Camera cam{400, 200, M_PI / 3};
     cam.setTransformation(view_transform(point(-1, 1.5, -1), point(2, 0, 5), vector(0, 1, 0)));
 
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
