@@ -22,10 +22,12 @@ class Shape
     virtual ~Shape() = default;
     Shape() = default;
 
-    void operator=(Shape *sp)
+    Shape& operator=(const Shape& sp)
     {
-        setTransform(sp->getTransform());
-        material = sp->material;
+        setTransform(sp.getTransform());
+        material = sp.material;
+
+        return *this;
     }
 
     bool operator==(Shape &sp)
@@ -38,6 +40,6 @@ class Shape
     virtual std::vector<Intersection> local_intersect(Ray) = 0;
     virtual Tuple local_normal_at(const Tuple &) = 0;
     void setTransform(Matrix);
-    Matrix getTransform();
+    Matrix getTransform() const;
     Matrix getInversedTransform();
 };

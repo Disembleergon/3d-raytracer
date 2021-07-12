@@ -146,10 +146,15 @@ class Matrix
         return m;
     }
 
-    void operator=(const Matrix &m)
+    // default copy constructor
+    Matrix(const Matrix &orig) = default;
+
+    Matrix& operator=(const Matrix &m)
     {
         resize(m.rows(), m.cols());
         m_elements = m.elements();
+
+        return *this;
     }
 
     Tuple operator*(const Tuple &tup)
@@ -175,7 +180,7 @@ class Matrix
 
         for (size_type i = 0; i < rows() - 1; i++)
         {
-            // Reihe überspringen
+            // Reihe ï¿½berspringen
             if (i == rowToRemove)
             {
                 sourceRow++;
@@ -186,7 +191,7 @@ class Matrix
             for (size_type j = 0; j < cols() - 1; j++)
             {
 
-                // Spalte überspringen
+                // Spalte ï¿½berspringen
                 if (j == colToRemove)
                 {
                     sourceCol++;
@@ -259,9 +264,9 @@ inline Matrix IDENTITY_MATRIX()
 };
 
 /*
-    gewünschte Reihenfolge immer rückwärts angeben!
+    gewï¿½nschte Reihenfolge immer rï¿½ckwï¿½rts angeben!
     A = translate(...), B = rotate(...), C = scale(...)
-    gewünschte Reihenfolge: rotate, scale, translate
+    gewï¿½nschte Reihenfolge: rotate, scale, translate
     -> (B * C * A) * teapot
  */
 

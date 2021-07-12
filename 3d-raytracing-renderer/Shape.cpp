@@ -24,7 +24,7 @@ void Shape::setTransform(Matrix n)
     inversedTransform = transform.inverse();
 }
 
-Matrix Shape::getTransform()
+Matrix Shape::getTransform() const
 {
     return this->transform;
 }
