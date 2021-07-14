@@ -2,7 +2,6 @@
 #include "Shape.h"
 #include <algorithm>
 #include <vector>
-#include "Shape.h"
 
 struct Intersection
 {
