@@ -74,7 +74,7 @@ int main()
 
     w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
 
-    Camera cam{400, 200, M_PI / 3};
+    Camera cam{100, 50, M_PI / 3};
     cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
 
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
