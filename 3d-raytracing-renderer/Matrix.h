@@ -149,7 +149,7 @@ class Matrix
     // default copy constructor
     Matrix(const Matrix &orig) = default;
 
-    Matrix& operator=(const Matrix &m)
+    Matrix &operator=(const Matrix &m)
     {
         resize(m.rows(), m.cols());
         m_elements = m.elements();
@@ -232,12 +232,8 @@ class Matrix
 
     Matrix inverse()
     {
-
         if (determinant() == 0)
-        {
             throw std::logic_error("Matrix ist nicht invertierbar!");
-            return Matrix{rows(), cols()};
-        }
 
         Matrix m2{rows(), cols()};
 

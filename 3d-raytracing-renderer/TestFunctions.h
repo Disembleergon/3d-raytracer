@@ -137,35 +137,45 @@ inline void CanvasTest()
     World world{};
 
     Sphere middle{};
-    middle.setTransform(translation(-0.5, 1, 0.5));
-    middle.material.color = Color{0.1, 1, 0.5};
-    middle.material.diffuse = 0.7;
-    middle.material.specular = 0.3;
-    //middle.material.reflective = 0.6;
+    //iddle.material.refractive_index = 1.52;
+    //middle.material.transparency = 1;
+    middle.material.diffuse = 0.1;
+    middle.material.shininess = 300;
+    middle.material.reflective = 1;
+    middle.material.color = Color{0, 0, 0.1};
     world.addShape<Sphere>(middle);
 
-    Sphere right{};
+    /*Sphere right{};
     right.setTransform(translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5));
     right.material.color = Color{0.5, 1, 0.1};
     right.material.diffuse = 0.7;
     right.material.specular = 0.3;
-    //right.material.reflective = 1;
-    world.addShape<Sphere>(right);
+    world.addShape<Sphere>(right);*/
 
-    Sphere left{};
+    /*Sphere left{};
     left.setTransform(translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33));
     left.material.color = Color{1, 0.8, 0.1};
     left.material.diffuse = 0.7;
     left.material.specular = 0.3;
-    //left.material.reflective = 1;
-    world.addShape<Sphere>(left);
+    world.addShape<Sphere>(left);*/
 
-    Plane underground{};
-    world.addShape<Plane>(underground);
+    /*Plane underground{};
+    world.addShape<Plane>(underground);*/
 
-    world.light = PointLight{point(-10, 10, -10), Color{1, 1, 1}};
-    Camera cam{100, 50, M_PI / 3};
-    cam.setTransformation(view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0)));
+    Plane wall{};
+    wall.setTransform(translation(0, -10, 0));
+
+    SolidPattern black{Color{0, 0, 0}};
+    SolidPattern white{Color{1, 1, 1}};
+    CheckersPattern checkers{makePattern_ptr<SolidPattern>(black), makePattern_ptr<SolidPattern>(white)};
+    //checkers.setTransform(scaling(0.6, 0.6, 0.6));
+
+    wall.material.pattern = makePattern_ptr<CheckersPattern>(checkers);
+    world.addShape<Plane>(wall);
+
+    world.light = PointLight{point(2, 10, -5), Color{0.9, 0.9, 0.9}};
+    Camera cam{600, 300, M_PI / 3};
+    cam.setTransformation(view_transform(point(0, 2.5, 0), point(0, 0, 0), vector(1, 0, 0)));
 
     world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 }

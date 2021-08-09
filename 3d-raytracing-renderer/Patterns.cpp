@@ -5,6 +5,11 @@
 
 #include <math.h>
 
+Color TestPattern::pattern_at(Tuple p)
+{
+    return Color{p.x, p.y, p.z};
+}
+
 Color StripePattern::pattern_at(Tuple p)
 {
     if (static_cast<int>(std::floor(p.x)) % 2 == 0)

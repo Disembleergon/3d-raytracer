@@ -62,4 +62,10 @@ Color color_at(World &world, Ray &r, const int remaining = 4);
 bool is_shadowed(World &world, Tuple &p);
 
 // reflection algorithm
-Color reflected_color(World &, Computations &, const int &remaining);
+Color reflected_color(World &, Computations &, const int remaining);
+
+// refraction
+Color refracted_color(World &, Computations &, const int remaining);
+
+// fresnel effect
+double schlick(Computations &);

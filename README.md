@@ -10,7 +10,7 @@
 - [X] Shadows
 - [X] Planes
 - [X] Patterns
-- [ ] Reflection and Refraction
+- [X] Reflection and Refraction
 - [ ] Cubes
 - [ ] Cylinders
 - [ ] Groups
@@ -18,7 +18,7 @@
 - [ ] Constructive Solid Geometry (CSG)
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
 
-<br>![progressbar](https://progress-bar.dev/59)
+<br>![progressbar](https://progress-bar.dev/65)
 <br>
 # Optional
 - improve performance

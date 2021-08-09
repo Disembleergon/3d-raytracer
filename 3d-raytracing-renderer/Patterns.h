@@ -2,6 +2,17 @@
 #include "Color.h"
 #include "Pattern.h"
 
+class TestPattern : public Pattern
+{
+  public:
+    TestPattern()
+    {
+        // EMPTY
+    }
+
+    Color pattern_at(Tuple) override;
+};
+
 class StripePattern : public Pattern
 {
   private:

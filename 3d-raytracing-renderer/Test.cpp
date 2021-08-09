@@ -2,83 +2,63 @@
 
 int main()
 {
-    /*
-      World w{};
+    /*World w = DEFAULT_WORLD();
 
-      Plane ground{};
+    Plane floor{};
+    floor.setTransform(translation(0, -1, 0));
+    floor.material.transparency = 0.5;
+    floor.material.refractive_index = 1.5;
+    w.addShape<Plane>(floor);
 
-      // ---- pattern -----
+    Sphere ball{};
+    ball.material.color = Color{1, 0, 0};
+    ball.material.ambient = 0.5;
+    ball.setTransform(translation(0, -3.5, -0.5));
+    w.addShape<Sphere>(ball);
 
-      SolidPattern grey1{highvalueColor(114, 115, 117)};
-      SolidPattern grey2{highvalueColor(73, 74, 77)};
-      StripePattern stripe1{makePattern_ptr<SolidPattern>(grey1), makePattern_ptr<SolidPattern>(grey2)};
-      stripe1.setTransform(scaling(0.2, 0.2, 0.2) * rotate_y(toRadians(45)));
+    Ray r{point(0, 0, -3), vector(0, -sqrt(2) / 2, sqrt(2) / 2)};
+    IntersectionList xs = {Intersection{sqrt(2), &floor }};
 
-      SolidPattern pink1{highvalueColor(214, 39, 71)};
-      SolidPattern pink2{highvalueColor(255, 105, 132)};
-      StripePattern stripe2{makePattern_ptr<SolidPattern>(pink1), makePattern_ptr<SolidPattern>(pink2)};
-      stripe2.setTransform(scaling(0.2, 0.2, 0.2) * rotate_y(toRadians(-45)));
-
-      CheckersPattern checkers{makePattern_ptr<StripePattern>(stripe1), makePattern_ptr<StripePattern>(stripe2)};
-      ground.material.pattern = makePattern_ptr<CheckersPattern>(checkers);
-
-      // ---- pattern end -----
-
-      w.addShape<Plane>(ground);
-
-      w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
-
-      Camera cam{400, 200, M_PI / 3};
-      cam.setTransformation(view_transform(point(-1, 1.5, -1), point(2, 0, 5), vector(0, 1, 0)));
-
-      w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
-      */
+    auto comps = prepare_computations(xs[0], r, xs);
+    Color clr = shade_hit(w, comps, 5);
+    TESTS::printColor(clr);*/
 
     World w{};
 
-    Sphere sp{};
+    Plane wall{};
+    wall.setTransform(rotate_x(1.5708) * translation(0, 0, 10));
 
-    auto sphereSolid1 = SolidPattern{highvalueColor(62, 107, 98)};
-    auto sphereSolid2 = SolidPattern{highvalueColor(178, 192, 161)};
-    auto sphereStripe =
-        StripePattern{makePattern_ptr<SolidPattern>(sphereSolid1), makePattern_ptr<SolidPattern>(sphereSolid2)};
+    SolidPattern clrA{Color{0.15, 0.15, 0.15}};
+    SolidPattern clrB{Color{0.85, 0.85, 0.85}};
+    CheckersPattern checkers{makePattern_ptr<SolidPattern>(clrA), makePattern_ptr<SolidPattern>(clrB)};
+    wall.material.pattern = makePattern_ptr<CheckersPattern>(checkers);
 
-    sp.material.pattern =
-        makePattern_ptr<JitteredPattern>(JitteredPattern{makePattern_ptr<StripePattern>(sphereStripe), 0.6});
-    sp.material.pattern->setTransform(rotate_z(toRadians(50)) * scaling(0.4, 0.4, 0.4));
-    sp.material.specular = 0.9;
-    sp.material.diffuse = 0.7;
-    sp.material.ambient = 0.6;
-    sp.setTransform(translation(0, 1, 0));
-    w.addShape<Sphere>(sp);
+    wall.material.ambient = 0.8;
+    wall.material.diffuse = 0.2;
+    wall.material.specular = 0;
+    w.addShape<Plane>(wall);
 
-    Plane underground{};
+    Sphere glassSphere{};
 
-    // pattern config
+    Material glass{};
+    glass.color = Color{1, 1, 1};
+    glass.ambient = 0;
+    glass.diffuse = 0;
+    glass.specular = 0.9;
+    glass.shininess = 300;
+    glass.reflective = 0.9;
+    glass.transparency = 0.9;
+    glass.refractive_index = RefractiveIndex::glass;
 
-    auto solidOne = SolidPattern{highvalueColor(158, 201, 212)};
-    auto solidTwo = SolidPattern{highvalueColor(66, 91, 123)};
-    auto sOneStripe = StripePattern{makePattern_ptr<SolidPattern>(solidOne), makePattern_ptr<SolidPattern>(solidTwo)};
+    glassSphere.material = glass;
+    w.addShape<Sphere>(glassSphere);
 
-    auto sOne = JitteredPattern{makePattern_ptr<StripePattern>(sOneStripe), 0.6};
-    auto sTwo = StripePattern{makePattern_ptr(solidTwo), makePattern_ptr(solidOne)};
+    w.light = PointLight{point(2, 10, -5), Color{0.9, 0.9, 0.9}};
 
-    sTwo.setTransform(rotate_y(toRadians(90)) * scaling(0.7, 0.7, 0.7));
-    sOne.setTransform(scaling(0.7, 0.7, 0.7));
-
-    // pattern config end
-
-    underground.material.pattern = makePattern_ptr<BlendPattern>(
-        BlendPattern{makePattern_ptr<JitteredPattern>(sOne), makePattern_ptr<StripePattern>(sTwo)});
-    //w.addShape<Plane>(underground);
-
-    w.light = PointLight{point(-10, 10, -5), Color{1, 1, 1}};
-
-    Camera cam{100, 50, M_PI / 3};
-    cam.setTransformation(view_transform(point(0, 1, -5), point(0, 1, 0), vector(0, 1, 0)));
+    Camera cam{300, 300, .5};
+    cam.setTransformation(view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
 
     w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 
-    system("pause");
     return 0;
 }
