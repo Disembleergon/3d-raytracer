@@ -2,7 +2,6 @@
 #define _USE_MATH_DEFINES
 #define EPSILON 0.00001
 
-#include <fstream>
 #include <iostream>
 #include <math.h>
 
@@ -10,6 +9,7 @@
 #include "Canvas.h"
 #include "Color.h"
 #include "Computations.h"
+#include "Cube.h"
 #include "Equal.h"
 #include "Intersection.h"
 #include "Material.h"
@@ -132,52 +132,138 @@ inline void printCamera(Camera &cam)
     TESTS::printMatrix(cam.getTransformation());
 }
 
-inline void CanvasTest()
+inline void renderTest()
 {
-    World world{};
-
-    Sphere middle{};
-    //iddle.material.refractive_index = 1.52;
-    //middle.material.transparency = 1;
-    middle.material.diffuse = 0.1;
-    middle.material.shininess = 300;
-    middle.material.reflective = 1;
-    middle.material.color = Color{0, 0, 0.1};
-    world.addShape<Sphere>(middle);
-
-    /*Sphere right{};
-    right.setTransform(translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5));
-    right.material.color = Color{0.5, 1, 0.1};
-    right.material.diffuse = 0.7;
-    right.material.specular = 0.3;
-    world.addShape<Sphere>(right);*/
-
-    /*Sphere left{};
-    left.setTransform(translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33));
-    left.material.color = Color{1, 0.8, 0.1};
-    left.material.diffuse = 0.7;
-    left.material.specular = 0.3;
-    world.addShape<Sphere>(left);*/
-
-    /*Plane underground{};
-    world.addShape<Plane>(underground);*/
+    /*World w{};
 
     Plane wall{};
-    wall.setTransform(translation(0, -10, 0));
+    wall.setTransform(translation(0, 0, 10) * rotate_x(1.5708));
 
-    SolidPattern black{Color{0, 0, 0}};
-    SolidPattern white{Color{1, 1, 1}};
-    CheckersPattern checkers{makePattern_ptr<SolidPattern>(black), makePattern_ptr<SolidPattern>(white)};
-    //checkers.setTransform(scaling(0.6, 0.6, 0.6));
-
+    SolidPattern clrA{Color{0.15, 0.15, 0.15}};
+    SolidPattern clrB{Color{0.85, 0.85, 0.85}};
+    CheckersPattern checkers{makePattern_ptr<SolidPattern>(clrA), makePattern_ptr<SolidPattern>(clrB)};
     wall.material.pattern = makePattern_ptr<CheckersPattern>(checkers);
-    world.addShape<Plane>(wall);
 
-    world.light = PointLight{point(2, 10, -5), Color{0.9, 0.9, 0.9}};
-    Camera cam{600, 300, M_PI / 3};
-    cam.setTransformation(view_transform(point(0, 2.5, 0), point(0, 0, 0), vector(1, 0, 0)));
+    wall.material.ambient = 0.8;
+    wall.material.diffuse = 0.2;
+    wall.material.specular = 0;
+    w.addShape<Plane>(wall);
 
-    world.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
+    Sphere glassSphere{};
+
+    Material glass{};
+    glass.color = Color{1, 1, 1};
+    glass.ambient = 0;
+    glass.diffuse = 0;
+    glass.specular = 0.9;
+    glass.shininess = 300;
+    glass.reflective = 0.9;
+    glass.transparency = 0.9;
+    glass.refractive_index = RefractiveIndex::glass;
+
+    glassSphere.material = glass;
+    w.addShape<Sphere>(glassSphere);
+
+    Material hollow{};
+    hollow.color = Color{1, 1, 1};
+    hollow.ambient = 0;
+    hollow.diffuse = 0;
+    hollow.specular = 0.9;
+    hollow.shininess = 300;
+    hollow.reflective = 0.9;
+    hollow.transparency = 0.9;
+    hollow.refractive_index = 1.0000034;
+
+    Sphere hollowSphere{};
+    hollowSphere.setTransform(scaling(0.5, 0.5, 0.5));
+    hollowSphere.material = hollow;
+    w.addShape<Sphere>(hollowSphere);
+
+    w.light = PointLight{point(2, 10, -5), Color{0.9, 0.9, 0.9}};
+
+    Camera cam{300, 300, .45};
+    cam.setTransformation(view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
+
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");*/
+
+    // ----------------- room with table and a mirror -------------------
+
+    World w{};
+
+    Material table{};
+    table.color = highvalueColor(125, 84, 84);
+
+    SolidPattern brown{highvalueColor(117, 77, 75)};
+    SolidPattern darkbrown{highvalueColor(87, 59, 58)};
+    StripePattern wooden{makePattern_ptr<SolidPattern>(brown), makePattern_ptr<SolidPattern>(darkbrown)};
+    wooden.setTransform(scaling(0.2, 0.2, 0.2));
+
+    Material room{};
+    // room.color = highvalueColor(194, 194, 194);
+    room.shininess = 300;
+    room.pattern = makePattern_ptr<StripePattern>(wooden);
+
+    // underground pattern
+    SolidPattern red{highvalueColor(240, 43, 36)};
+    SolidPattern white{highvalueColor(209, 175, 174)};
+    CheckersPattern undergroundCheckers{makePattern_ptr<SolidPattern>(red), makePattern_ptr<SolidPattern>(white)};
+
+    Plane underground{};
+    underground.material = room;
+    underground.material.pattern = makePattern_ptr<CheckersPattern>(undergroundCheckers);
+    underground.material.reflective = 0.2;
+    w.addShape<Plane>(underground);
+
+    Plane wall1{};
+    wall1.material = room;
+    wall1.setTransform(translation(-5, 0, 5) * rotate_y(toRadians(-45)) * rotate_x(toRadians(-90)));
+    w.addShape<Plane>(wall1);
+
+    Plane wall2{};
+    wall2.material = room;
+    wall2.setTransform(translation(5, 0, 5) * rotate_y(toRadians(45)) * rotate_x(toRadians(-90)));
+    w.addShape<Plane>(wall2);
+
+    Cube tablePart1{};
+    tablePart1.setTransform(translation(-1, 0, 1) * scaling(0.1, 0.7, 0.1));
+    tablePart1.material = table;
+    w.addShape<Cube>(tablePart1);
+
+    Cube tablePart2{};
+    tablePart2.setTransform(translation(1, 0, 1) * scaling(0.1, 0.7, 0.1));
+    tablePart2.material = table;
+    w.addShape<Cube>(tablePart2);
+
+    Cube tablePart3{};
+    tablePart3.setTransform(translation(-1, 0, 0) * scaling(0.1, 0.7, 0.1));
+    tablePart3.material = table;
+    w.addShape<Cube>(tablePart3);
+
+    Cube tablePart4{};
+    tablePart4.setTransform(translation(1, 0, 0) * scaling(0.1, 0.7, 0.1));
+    tablePart4.material = table;
+    w.addShape<Cube>(tablePart4);
+
+    Cube tableTop{};
+    tableTop.setTransform(translation(0, 0.8, 0.6) * scaling(1.2, 0.1, 0.7));
+    tableTop.material = table;
+    w.addShape<Cube>(tableTop);
+
+    Cube mirror{};
+    mirror.material.reflective = 1;
+    mirror.material.diffuse = 0;
+    mirror.material.ambient = 0;
+    mirror.material.shininess = 300;
+    mirror.material.color = Color{1, 1, 1};
+    mirror.setTransform(translation(4, 1.4, 6.1) * rotate_y(toRadians(45)) * scaling(2, 1, 0.1));
+    w.addShape<Cube>(mirror);
+
+    w.light = PointLight{point(2, 5, -5), Color{1, 1, 1}};
+
+    Camera cam{4000, 2000, M_PI / 3};
+    cam.setTransformation(view_transform(point(0, 2, -5), point(0, 1, 0), vector(0, 1, 0)));
+
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 }
 
 } // namespace TESTS
