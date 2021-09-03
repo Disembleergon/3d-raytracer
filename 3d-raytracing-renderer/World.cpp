@@ -95,9 +95,9 @@ Color refracted_color(World &w, Computations &comps, const int remaining)
     const auto cos_i = dot(comps.eyev, comps.normalv);
 
     // Find sin(theta_t)^2 via trigonometric identity
-    const double sin2_t = powf(n_ratio, 2) * (1 - powf(cos_i, 2));
+    const double sin2_t = pow(n_ratio, 2) * (1 - pow(cos_i, 2));
 
-    if (sin2_t > 1)   // total internal reflection
+    if (sin2_t > 1)     // total internal reflection
         return Color{}; // black
 
     // ------ finding the refracted color --------

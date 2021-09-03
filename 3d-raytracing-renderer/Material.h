@@ -4,8 +4,9 @@
 
 using member_t = double;
 
-struct Material
+class Material
 {
+  public:
     member_t ambient{0.1};
     member_t diffuse{0.9};
     member_t specular{0.9};

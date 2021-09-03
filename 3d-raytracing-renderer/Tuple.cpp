@@ -1,11 +1,11 @@
 #include "Tuple.h"
 #include <math.h>
 
-Tuple vector(scalar_t Px, scalar_t Py, scalar_t Pz) {
+Tuple vector(member_t Px, member_t Py, member_t Pz) {
 	return{ Px, Py, Pz, 0 };
 }
 
-Tuple point(scalar_t Px, scalar_t Py, scalar_t Pz) {
+Tuple point(member_t Px, member_t Py, member_t Pz) {
 	return { Px, Py, Pz, 1 };
 }
 
@@ -13,12 +13,12 @@ Tuple negate(const Tuple& tup) {
 	return { -tup.x, -tup.y, -tup.z, -tup.w };
 }
 
-scalar_t magnitude(const Tuple& vect) {
+member_t magnitude(const Tuple& vect) {
 	
-	scalar_t px = pow(vect.x, 2);
-	scalar_t py = pow(vect.y, 2);
-	scalar_t pz = pow(vect.z, 2);
-	scalar_t pw = pow(vect.w, 2);
+	member_t px = pow(vect.x, 2);
+	member_t py = pow(vect.y, 2);
+	member_t pz = pow(vect.z, 2);
+	member_t pw = pow(vect.w, 2);
 
 	return sqrt(px + py + pz + pw);
 
@@ -37,12 +37,12 @@ Tuple normalize(const Tuple& vect) {
 
 }
 
-scalar_t dot(const Tuple& vect1, const Tuple& vect2) {
+member_t dot(const Tuple& vect1, const Tuple& vect2) {
 
 	return vect1.x * vect2.x +
 		vect1.y * vect2.y +
 		vect1.z * vect2.z +
-		static_cast<scalar_t>(vect1.w) * vect2.w;	// sonst: Arithmetischer Überlauf
+		static_cast<member_t>(vect1.w) * vect2.w;	// sonst: Arithmetischer Überlauf
 
 }
 

@@ -13,15 +13,16 @@ class Ray;
 class Canvas;
 class Camera;
 
-struct World
+class World
 {
+  public:
     std::vector<std::unique_ptr<Shape>> objects{};
     PointLight light;
 
     World() = default;
 
-    //World &operator=(const World &) = delete;
-    //World(const World &) = delete;
+    // World &operator=(const World &) = delete;
+    // World(const World &) = delete;
 
     Canvas render(Camera &);
 

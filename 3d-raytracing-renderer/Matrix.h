@@ -19,7 +19,7 @@ class Matrix
   public:
     using size_type = std::vector<std::vector<element_type>>::size_type;
 
-    Matrix(const size_t &rows, const size_t &cols) : m_rows{rows}, m_cols{cols}
+    Matrix(const size_type &rows, const size_type &cols) : m_rows{rows}, m_cols{cols}
     {
 
         for (size_type row = 0; row < m_rows; row++)
@@ -63,7 +63,7 @@ class Matrix
     {
         return m_elements;
     };
-    void resize(const int &rows, const int &cols)
+    void resize(const size_type &rows, const size_type &cols)
     {
         m_rows = rows;
         m_cols = cols;
@@ -75,7 +75,7 @@ class Matrix
         m_elements[row][col] = value;
     }
 
-    const element_type get(const unsigned int &row, const unsigned int &col) const
+    const element_type get(const size_type &row, const size_type &col) const
     {
         return m_elements[row][col];
     }
@@ -206,12 +206,12 @@ class Matrix
         return result;
     }
 
-    element_type minor(const int pRow, const int pCol) const
+    element_type minor(const size_type pRow, const size_type pCol) const
     {
         return submatrix(pRow, pCol).determinant();
     }
 
-    element_type cofactor(const int pRow, const int pCol) const
+    element_type cofactor(const size_type pRow, const size_type pCol) const
     {
         return minor(pRow, pCol) * ((pRow + pCol) % 2 == 0 ? 1 : -1);
     }

@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <vector>
 
-struct Intersection
+class Intersection
 {
-
+  public:
     double t;
     Shape *object;
 

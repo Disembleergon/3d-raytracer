@@ -5,8 +5,9 @@
 class Intersection;
 class Ray;
 
-struct Computations
+class Computations
 {
+  public:
     double t;
     Shape *object;
     Tuple point;

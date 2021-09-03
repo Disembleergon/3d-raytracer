@@ -2,7 +2,7 @@
 #include "Matrix.h"
 #include <memory>
 
-class Color;
+struct Color;
 class Tuple;
 class Shape;
 

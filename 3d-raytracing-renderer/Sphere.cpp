@@ -11,10 +11,10 @@ IntersectionList Sphere::local_intersect(Ray r)
     remember: the sphere is centered at the world origin*/
     Tuple sphere_to_ray = r.origin() - point(0, 0, 0);
 
-    scalar_t a = dot(r.direction(), r.direction());
-    scalar_t b = 2 * (dot(r.direction(), sphere_to_ray));
-    scalar_t c = (dot(sphere_to_ray, sphere_to_ray) - 1);
-    scalar_t discriminant = pow(b, 2) - 4 * a * c;
+    member_t a = dot(r.direction(), r.direction());
+    member_t b = 2 * (dot(r.direction(), sphere_to_ray));
+    member_t c = (dot(sphere_to_ray, sphere_to_ray) - 1);
+    member_t discriminant = pow(b, 2) - 4 * a * c;
 
     if (discriminant < 0) // wenn negativ: Ray verfehlt Sphere
         return intersections;

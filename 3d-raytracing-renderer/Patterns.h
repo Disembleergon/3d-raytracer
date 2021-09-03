@@ -97,7 +97,7 @@ class JitteredPattern : public Pattern
 {
   private:
     pattern_ptr p;
-    float scaleValue = 0.01;
+    float scaleValue = 0.01f;
 
   public:
     JitteredPattern(pattern_ptr pattern) : p{pattern}

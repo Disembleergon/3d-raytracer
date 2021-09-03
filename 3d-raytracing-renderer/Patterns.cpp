@@ -30,7 +30,7 @@ Color RingPattern::pattern_at(Tuple p)
 {
     const double powX = p.x * p.x;
     const double powZ = p.z * p.z;
-    const double squareroot = sqrtf(powX + powZ);
+    const double squareroot = sqrt(powX + powZ);
 
     if (static_cast<int>(std::floor(squareroot)) % 2 == 0)
         return a->pattern_at(a->getInversedTransform() * p);

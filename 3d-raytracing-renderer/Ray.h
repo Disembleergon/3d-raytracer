@@ -7,7 +7,7 @@ class Shape;
 class World;
 class Intersection;
 
-using scalar_t = double;
+using member_t = double;
 
 class Ray
 {
@@ -31,7 +31,7 @@ class Ray
         return m_direction;
     }
 
-    Tuple position(const scalar_t &t) const
+    Tuple position(const member_t &t) const
     {
         return m_origin + m_direction * t;
     }
