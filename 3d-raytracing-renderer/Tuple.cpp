@@ -47,7 +47,7 @@ member_t dot(const Tuple& vect1, const Tuple& vect2) {
 }
 
 Tuple cross(const Tuple& tup1, const Tuple& tup2) {
-	return{
+	return {
 
 		tup1.y * tup2.z - tup1.z * tup2.y,
 		tup1.z * tup2.x - tup1.x * tup2.z,

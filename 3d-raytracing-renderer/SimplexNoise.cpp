@@ -19,24 +19,24 @@ std::array<int, 256> s_permutation = {
     67,  29,  24,  72,  243, 141, 128, 195, 78,  66,  215, 61,  156, 180};
 }
 
-float SimplexNoise::Noise(float x, float y, float z) const
+SimplexNoise::size_type SimplexNoise::Noise(size_type x, size_type y, size_type z) const
 {
-    float n0, n1, n2, n3;
+    size_type n0, n1, n2, n3;
 
-    static const float F3 = 1.0f / 3.0f;
-    static const float G3 = 1.0f / 6.0f;
+    static const size_type F3 = 1.0f / 3.0f;
+    static const size_type G3 = 1.0f / 6.0f;
 
-    float s = (x + y + z) * F3; // Very nice and simple skew factor for 3D
+    size_type s = (x + y + z) * F3; // Very nice and simple skew factor for 3D
     int i = fastfloor(x + s);
     int j = fastfloor(y + s);
     int k = fastfloor(z + s);
-    float t = (i + j + k) * G3;
-    float X0 = i - t; // Unskew the cell origin back to (x,y,z) space
-    float Y0 = j - t;
-    float Z0 = k - t;
-    float x0 = x - X0; // The x,y,z distances from the cell origin
-    float y0 = y - Y0;
-    float z0 = z - Z0;
+    size_type t = (i + j + k) * G3;
+    size_type X0 = i - t; // Unskew the cell origin back to (x,y,z) space
+    size_type Y0 = j - t;
+    size_type Z0 = k - t;
+    size_type x0 = x - X0; // The x,y,z distances from the cell origin
+    size_type y0 = y - Y0;
+    size_type z0 = z - Z0;
 
     int i1, j1, k1; // Offsets for second corner of simplex in (i,j,k) coords
     int i2, j2, k2; // Offsets for third corner of simplex in (i,j,k) coords
@@ -101,15 +101,15 @@ float SimplexNoise::Noise(float x, float y, float z) const
         }
     }
 
-    float x1 = x0 - i1 + G3; // Offsets for second corner in (x,y,z) coords
-    float y1 = y0 - j1 + G3;
-    float z1 = z0 - k1 + G3;
-    float x2 = x0 - i2 + 2.0f * G3; // Offsets for third corner in (x,y,z) coords
-    float y2 = y0 - j2 + 2.0f * G3;
-    float z2 = z0 - k2 + 2.0f * G3;
-    float x3 = x0 - 1.0f + 3.0f * G3; // Offsets for last corner in (x,y,z) coords
-    float y3 = y0 - 1.0f + 3.0f * G3;
-    float z3 = z0 - 1.0f + 3.0f * G3;
+    size_type x1 = x0 - i1 + G3; // Offsets for second corner in (x,y,z) coords
+    size_type y1 = y0 - j1 + G3;
+    size_type z1 = z0 - k1 + G3;
+    size_type x2 = x0 - i2 + 2.0f * G3; // Offsets for third corner in (x,y,z) coords
+    size_type y2 = y0 - j2 + 2.0f * G3;
+    size_type z2 = z0 - k2 + 2.0f * G3;
+    size_type x3 = x0 - 1.0f + 3.0f * G3; // Offsets for last corner in (x,y,z) coords
+    size_type y3 = y0 - 1.0f + 3.0f * G3;
+    size_type z3 = z0 - 1.0f + 3.0f * G3;
 
     int gi0 = hash(i + hash(j + hash(k)));
     int gi1 = hash(i + i1 + hash(j + j1 + hash(k + k1)));
@@ -117,7 +117,7 @@ float SimplexNoise::Noise(float x, float y, float z) const
     int gi3 = hash(i + 1 + hash(j + 1 + hash(k + 1)));
 
     // Calculate the contribution from the four corners
-    float t0 = 0.6f - x0 * x0 - y0 * y0 - z0 * z0;
+    size_type t0 = 0.6f - x0 * x0 - y0 * y0 - z0 * z0;
     if (t0 < 0)
     {
         n0 = 0.0;
@@ -127,7 +127,7 @@ float SimplexNoise::Noise(float x, float y, float z) const
         t0 *= t0;
         n0 = t0 * t0 * grad(gi0, x0, y0, z0);
     }
-    float t1 = 0.6f - x1 * x1 - y1 * y1 - z1 * z1;
+    size_type t1 = 0.6f - x1 * x1 - y1 * y1 - z1 * z1;
     if (t1 < 0)
     {
         n1 = 0.0;
@@ -137,7 +137,7 @@ float SimplexNoise::Noise(float x, float y, float z) const
         t1 *= t1;
         n1 = t1 * t1 * grad(gi1, x1, y1, z1);
     }
-    float t2 = 0.6f - x2 * x2 - y2 * y2 - z2 * z2;
+    size_type t2 = 0.6f - x2 * x2 - y2 * y2 - z2 * z2;
     if (t2 < 0)
     {
         n2 = 0.0;
@@ -147,7 +147,7 @@ float SimplexNoise::Noise(float x, float y, float z) const
         t2 *= t2;
         n2 = t2 * t2 * grad(gi2, x2, y2, z2);
     }
-    float t3 = 0.6f - x3 * x3 - y3 * y3 - z3 * z3;
+    size_type t3 = 0.6f - x3 * x3 - y3 * y3 - z3 * z3;
     if (t3 < 0)
     {
         n3 = 0.0;

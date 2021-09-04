@@ -9,8 +9,6 @@ class Tuple
     member_t y;
     member_t z;
     int w; //	0=Vector, 1=Point
-
-    Tuple() = default;
 };
 
 inline Tuple operator+(const Tuple &tup1, const Tuple &tup2)

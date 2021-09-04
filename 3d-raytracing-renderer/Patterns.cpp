@@ -47,7 +47,7 @@ Color CheckersPattern::pattern_at(Tuple p)
 Color PerlinNoisePattern::pattern_at(Tuple pnt)
 {
     SimplexNoise noise{};
-    const float distortion = noise.Noise(pnt.x, pnt.y, pnt.z) * scaleValue;
+    const auto distortion = noise.Noise(pnt.x, pnt.y, pnt.z) * scaleValue;
     auto disturbedPoint = point(pnt.x + distortion, pnt.y + distortion, pnt.z + distortion);
     return p->pattern_at(p->getInversedTransform() * disturbedPoint);
 }

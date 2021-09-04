@@ -6,10 +6,11 @@
 class SimplexNoise
 {
   public:
-    float Noise(float x, float y, float z) const;
+    using size_type = double;
+    size_type Noise(size_type x, size_type y, size_type z) const;
 
   private:
-    int32_t fastfloor(float fp) const
+    int32_t fastfloor(size_type fp) const
     {
         int32_t i = static_cast<int32_t>(fp);
         return (fp < i) ? (i - 1) : (i);
@@ -17,11 +18,11 @@ class SimplexNoise
 
     uint8_t hash(int32_t i) const;
 
-    float grad(int32_t hash, float x, float y, float z) const
+    size_type grad(int32_t hash, size_type x, size_type y, size_type z) const
     {
         int h = hash & 15;
-        float u = h < 8 ? x : y;
-        float v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+        size_type u = h < 8 ? x : y;
+        size_type v = h < 4 ? y : h == 12 || h == 14 ? x : z;
         return ((h & 1) ? -u : u) + ((h & 2) ? -v : v);
     }
 };
