@@ -132,6 +132,27 @@ inline void printCamera(Camera &cam)
     TESTS::printMatrix(cam.getTransformation());
 }
 
+// Test #7: Finding the Refracted Color
+inline void findingRefractiveColor()
+{
+    World w = DEFAULT_WORLD();
+
+    Shape *a = w.objects[0].get();
+    a->material.ambient = 1;
+    a->material.pattern = makePattern_ptr<TestPattern>(TestPattern{});
+
+    Shape *b = w.objects[1].get();
+    b->material.transparency = 1;
+    b->material.refractive_index = 1.5; // aka RefractiveIndex::glass
+
+    Ray r{point(0, 0, 0.1), vector(0, 1, 0)};
+    IntersectionList xs = {{-0.9899, a}, {-0.4899, b}, {0.4899, b}, {0.9899, a}};
+    Computations comps = prepare_computations(xs[2], r, xs);
+
+    Color clr = refracted_color(w, comps, 5);
+    TESTS::printColor(clr);
+}
+
 inline void renderTest()
 {
     /*World w{};
@@ -199,7 +220,6 @@ inline void renderTest()
     wooden.setTransform(scaling(0.2, 0.2, 0.2));
 
     Material room{};
-    // room.color = highvalueColor(194, 194, 194);
     room.shininess = 300;
     room.pattern = makePattern_ptr<StripePattern>(wooden);
 

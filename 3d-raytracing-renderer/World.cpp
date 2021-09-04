@@ -103,7 +103,7 @@ Color refracted_color(World &w, Computations &comps, const int remaining)
     // ------ finding the refracted color --------
 
     // Find cos(theta_t) via trigonometric identity
-    const auto cos_t = std::sqrt(1.0f - sin2_t);
+    const double cos_t = std::sqrt(1.0 - sin2_t);
 
     // Compute the direction of the refracted ray
     const Tuple direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio;
