@@ -1,3 +1,9 @@
+# Ray Tracer
+This is a ray tracer written in C++ using the book
+__"The Ray Tracer Challenge"__ by *Jamis Buck*.
+
+This ray tracer creates ppm files/pictures, not realtime simulations!
+
 # Progress:
 
 - [x] Tuples, Points, and Vectors
@@ -19,7 +25,3 @@
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
 
 <br>![progressbar](https://progress-bar.dev/73)
-
-# Known Issues
-
-- transparency (refraction) is broken

@@ -132,30 +132,10 @@ inline void printCamera(Camera &cam)
     TESTS::printMatrix(cam.getTransformation());
 }
 
-// Test #7: Finding the Refracted Color
-inline void findingRefractiveColor()
+inline void schlickTest()
 {
-    World w = DEFAULT_WORLD();
 
-    Shape *a = w.objects[0].get();
-    a->material.ambient = 1;
-    a->material.pattern = makePattern_ptr<TestPattern>(TestPattern{});
-
-    Shape *b = w.objects[1].get();
-    b->material.transparency = 1;
-    b->material.refractive_index = 1.5; // aka RefractiveIndex::glass
-
-    Ray r{point(0, 0, 0.1), vector(0, 1, 0)};
-    IntersectionList xs = {{-0.9899, a}, {-0.4899, b}, {0.4899, b}, {0.9899, a}};
-    Computations comps = prepare_computations(xs[2], r, xs);
-
-    Color clr = refracted_color(w, comps, 5);
-    TESTS::printColor(clr);
-}
-
-inline void renderTest()
-{
-    /*World w{};
+    World w{};
 
     Plane wall{};
     wall.setTransform(translation(0, 0, 10) * rotate_x(1.5708));
@@ -202,12 +182,15 @@ inline void renderTest()
 
     w.light = PointLight{point(2, 10, -5), Color{0.9, 0.9, 0.9}};
 
-    Camera cam{300, 300, .45};
+    Camera cam{800, 800, .45};
     cam.setTransformation(view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
 
-    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");*/
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
+}
 
-    // ----------------- room with table and a mirror -------------------
+inline void renderTest()
+{
+    //----------------- room with table and a mirror -------------------
 
     World w{};
 

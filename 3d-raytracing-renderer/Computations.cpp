@@ -12,8 +12,6 @@ Computations prepare_computations(Intersection i, Ray r, std::vector<Intersectio
     Tuple point = r.position(i.t);
     Tuple eyev = r.direction() * -1;
     Tuple normalv = i.object->normal_at(point);
-    Tuple overpoint = point + normalv * EPSILON;
-    Tuple underpoint = point - normalv * EPSILON;
     bool inside = false;
 
     // if normal vector and eye vector point in opposite directions: eye inside of sphere
@@ -23,6 +21,8 @@ Computations prepare_computations(Intersection i, Ray r, std::vector<Intersectio
         normalv = normalv * -1;
     }
 
+    Tuple overpoint = point + normalv * EPSILON;
+    Tuple underpoint = point - normalv * EPSILON;
     Tuple reflectv = reflect(r.direction(), normalv);
 
     std::vector<Shape *> containers{};

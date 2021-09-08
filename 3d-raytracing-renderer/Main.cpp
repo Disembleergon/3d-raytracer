@@ -2,7 +2,6 @@
 
 int main()
 {
-    
-
+    TESTS::renderTest();
     system("pause");
 }
