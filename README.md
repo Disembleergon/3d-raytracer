@@ -1,8 +1,7 @@
 # Ray Tracer
-This is a ray tracer written in C++ using the book
-__"The Ray Tracer Challenge"__ by *Jamis Buck*.
 
-This ray tracer creates ppm files/pictures, not realtime simulations!
+This is a ray tracer written in C++ using the book
+**"The Ray Tracer Challenge"** by _Jamis Buck_.
 
 # Progress:
 
