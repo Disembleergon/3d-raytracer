@@ -4,19 +4,22 @@
 
 int main()
 {
-    std::vector<Tuple> examples = {point(0, 1, 0), point(0.5, 1, 0), point(0, 1, 0.5),
-                                   point(0, 2, 0), point(0.5, 2, 0), point(0, 2, 0.5)};
+    World w{};
+
+    Plane underground{};
+    underground.material.color = highvalueColor(153, 238, 255);
+    w.addShape<Plane>(underground);
 
     Cylinder cyl{};
-    cyl.minimum = 1;
+    cyl.material.color = Color{0, 1, 0.3};
+    cyl.minimum = 0;
     cyl.maximum = 2;
-    cyl.closed = true;
+    w.addShape<Cylinder>(cyl);
 
-    for (const auto &example : examples)
-    {
-        const Tuple n = cyl.local_normal_at(example);
-        TESTS::printTuple(n);
-    }
+    w.light = PointLight{point(2, 10, -5), Color{1, 1, 1}};
 
-    system("pause");
+    Camera cam{2000, 1000, M_PI / 3};
+    cam.setTransformation(view_transform(point(0, 3, -5), point(0, 1, 0), vector(0, 1, 0)));
+
+    w.render(cam).toPPM("C:\\Users\\tompe\\desktop\\scene.ppm");
 }

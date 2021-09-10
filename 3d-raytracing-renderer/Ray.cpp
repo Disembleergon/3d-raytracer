@@ -4,10 +4,10 @@
 #include "World.h"
 
 #include <algorithm>
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
-IntersectionList Ray::intersect_world(World& world)
+IntersectionList Ray::intersect_world(World &world)
 {
 
     IntersectionList xs;
@@ -19,8 +19,14 @@ IntersectionList Ray::intersect_world(World& world)
 
         if (xxs.size() != 0)
         {
-            xs.push_back(xxs[0]);
-            xs.push_back(xxs[1]);
+            xs.push_back(xxs.at(0));
+            if (xxs.size() == 1)
+            {
+                xs.push_back(xxs.at(0));
+                continue;
+            }
+
+            xs.push_back(xxs.at(1));
         }
     }
 

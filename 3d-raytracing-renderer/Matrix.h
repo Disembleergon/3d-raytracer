@@ -147,7 +147,7 @@ class Matrix
     }
 
     // default copy constructor
-    Matrix(const Matrix &orig) = default;
+    //Matrix(const Matrix &orig) = default;
 
     Matrix &operator=(const Matrix &m)
     {
