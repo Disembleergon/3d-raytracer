@@ -1,5 +1,5 @@
 #include "Tuple.h"
-#include <math.h>
+#include <cmath>
 
 Tuple vector(member_t Px, member_t Py, member_t Pz) {
 	return{ Px, Py, Pz, 0 };

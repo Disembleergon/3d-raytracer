@@ -2,7 +2,7 @@
 #include "Color.h"
 #include "Tuple.h"
 
-#include <math.h>
+#include <cmath>
 
 class Material;
 class Shape;

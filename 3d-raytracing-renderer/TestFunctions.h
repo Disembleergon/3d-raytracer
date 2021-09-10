@@ -3,13 +3,14 @@
 #define EPSILON 0.00001
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 #include "Camera.h"
 #include "Canvas.h"
 #include "Color.h"
 #include "Computations.h"
 #include "Cube.h"
+#include "Cylinder.h"
 #include "Equal.h"
 #include "Intersection.h"
 #include "Material.h"

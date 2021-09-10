@@ -3,7 +3,7 @@
 #include "Ray.h"
 #include "Tuple.h"
 
-#include <math.h>
+#include <cmath>
 #define EPSILON 0.00001
 
 IntersectionList Plane::local_intersect(Ray r)

@@ -2,7 +2,7 @@
 
 #include "Equal.h"
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <string>
 
 using member_t = double;

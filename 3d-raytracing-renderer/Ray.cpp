@@ -5,7 +5,7 @@
 
 #include <algorithm>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 IntersectionList Ray::intersect_world(World& world)
 {

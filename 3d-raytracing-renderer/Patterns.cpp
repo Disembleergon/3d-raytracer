@@ -3,7 +3,7 @@
 #include "SimplexNoise.h"
 #include "Tuple.h"
 
-#include <math.h>
+#include <cmath>
 
 Color TestPattern::pattern_at(Tuple p)
 {

@@ -4,7 +4,7 @@
 #include "Ray.h"
 
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 
 std::vector<Intersection> Cube::local_intersect(Ray r)
 {

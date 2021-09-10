@@ -61,9 +61,7 @@ bool is_shadowed(World &world, Tuple &p)
     IntersectionList intersections = r.intersect_world(world);
     Intersection h = hit(intersections);
 
-    if (h.isDefined() && h.t < distance)
-        return true;
-    return false;
+    return h.isDefined() && h.t < distance;
 }
 
 Color reflected_color(World &w, Computations &comps, const int remaining)
