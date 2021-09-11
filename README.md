@@ -17,10 +17,16 @@ This is a ray tracer written in C++ using the book
 - [x] Patterns
 - [x] Reflection and Refraction
 - [x] Cubes
-- [ ] Cylinders
+- [x] Cylinders
 - [ ] Groups
 - [ ] Triangles
 - [ ] Constructive Solid Geometry (CSG)
 - [ ] Texture Maps, Anti-aliasing, Motion/Focal Blur, Soft Shadows
 
-<br>![progressbar](https://progress-bar.dev/73)
+<br>![progressbar](https://progress-bar.dev/76)
+
+# Optional
+
+- adding Cones
+- support multithreading
+- GPU accelerated
