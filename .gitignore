@@ -1,0 +1,14 @@
+.vs/
+3d-raytracing-renderer.sln
+3d-raytracing-renderer/.clang-tidy
+3d-raytracing-renderer/.vscode/
+3d-raytracing-renderer/3d-raytracing-renderer.vcxproj
+3d-raytracing-renderer/3d-raytracing-renderer.vcxproj.filters
+3d-raytracing-renderer/3d-raytracing-renderer.vcxproj.user
+3d-raytracing-renderer/Debug/
+3d-raytracing-renderer/Release/
+3d-raytracing-renderer/x64/
+3d-raytracing-renderer/*.gch
+Debug/
+Release/
+x64/
